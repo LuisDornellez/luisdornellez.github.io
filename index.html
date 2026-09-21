@@ -5,7 +5,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Libros de Luis Dornellez</title>
@@ -27,66 +26,83 @@ body {
 
 /* ========================= REPRODUCTOR ========================= */
 
-.reproductor-musica {
+.reproductor {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 1000;
+    top: 12px;
+    right: 12px;
+    z-index: 99999;
+
     display: flex;
     align-items: center;
-    gap: 7px;
-    background: rgba(33, 25, 20, 0.92);
+    gap: 8px;
+
+    background: #211914;
     color: white;
-    padding: 7px 10px;
+
+    padding: 6px 10px;
     border-radius: 25px;
-    box-shadow: 0 3px 12px #0004;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+
+    font-family: Arial, sans-serif;
     font-size: 12px;
 }
 
-.reproductor-musica button {
+.reproductor button {
+    width: 32px;
+    height: 32px;
+
     border: none;
+    border-radius: 50%;
+
     background: #9a6b2f;
     color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+
     cursor: pointer;
+
     font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: bold;
 }
 
-.reproductor-musica button:hover {
-    background: #b7823a;
+.reproductor button:hover {
+    background: #b78138;
 }
 
-.nombre-cancion {
-    max-width: 125px;
-    white-space: nowrap;
+#nombreCancion {
+    max-width: 130px;
+
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
+/* ========================= ENCABEZADO ========================= */
+
 header {
     position: relative;
+
     background: #30241f;
     color: white;
+
     padding: 50px 20px;
 }
 
 header h1 {
     margin: 0;
+
     font-family: 'Merriweather', serif;
     font-size: 44px;
     font-weight: 900;
+
     letter-spacing: 0.5px;
 }
 
 header p {
     font-family: 'Lato', sans-serif;
     font-size: 19px;
+
     color: #eadbd1;
+
     margin-top: 12px;
 }
 
@@ -94,11 +110,17 @@ header p {
     width: 100%;
     max-width: 1000px;
     height: 320px;
+
     object-fit: cover;
+
     display: block;
+
     margin: 30px auto 0;
+
     border-radius: 12px;
 }
+
+/* ========================= SECCIONES ========================= */
 
 section {
     padding: 45px 20px;
@@ -106,95 +128,140 @@ section {
 
 section > h2 {
     font-family: 'Merriweather', serif;
+
     font-size: 34px;
     font-weight: 700;
+
     margin-bottom: 30px;
 }
 
+/* ========================= LIBROS ========================= */
+
 .libros {
     max-width: 900px;
+
     margin: auto;
+
     display: flex;
     flex-wrap: wrap;
+
     justify-content: center;
+
     gap: 25px;
 }
 
 .libro {
     background: white;
+
     width: 300px;
+
     padding: 20px;
+
     border-radius: 12px;
+
     box-shadow: 0 5px 20px #0002;
 }
 
 .libro img {
     width: 100%;
     height: 420px;
+
     object-fit: cover;
+
     border-radius: 8px;
 }
 
 .libro h2 {
     font-family: 'Merriweather', serif;
+
     font-size: 25px;
     font-weight: 700;
+
     color: #30241f;
+
     line-height: 1.3;
 }
 
 .libro p {
     font-family: 'Lato', sans-serif;
+
     line-height: 1.7;
+
     color: #665750;
+
     font-size: 16px;
 }
 
 .precio {
     font-family: 'Lato', sans-serif;
+
     font-size: 25px;
     font-weight: 900;
+
     margin: 20px;
+
     color: #9a6b2f;
 }
 
 .comprar {
     display: block;
+
     background: #30241f;
+
     color: white;
+
     padding: 15px;
+
     border-radius: 30px;
+
     text-decoration: none;
+
     font-family: 'Lato', sans-serif;
+
     font-weight: 700;
+
     font-size: 15px;
+
     letter-spacing: 0.3px;
+
     transition: 0.3s;
 }
 
 .comprar:hover {
     background: #68483c;
+
     transform: translateY(-2px);
 }
 
+/* ========================= SOBRE MÍ ========================= */
+
 .sobre {
     background: #30241f;
+
     color: white;
 }
 
 .sobre h2 {
     font-family: 'Merriweather', serif;
+
     color: #ead0a7;
+
     font-size: 34px;
 }
 
 .sobre p {
     max-width: 600px;
+
     margin: auto;
+
     line-height: 1.8;
+
     font-family: 'Lato', sans-serif;
+
     font-size: 16px;
 }
+
+/* ========================= REDES ========================= */
 
 .redes {
     background: white;
@@ -202,20 +269,31 @@ section > h2 {
 
 .redes h2 {
     font-family: 'Merriweather', serif;
+
     color: #30241f;
+
     font-size: 34px;
 }
 
 .redes a {
     display: inline-block;
+
     margin: 5px;
+
     padding: 12px 18px;
+
     background: #30241f;
+
     color: white;
+
     text-decoration: none;
+
     border-radius: 20px;
+
     font-family: 'Lato', sans-serif;
+
     font-weight: 700;
+
     transition: 0.3s;
 }
 
@@ -223,20 +301,27 @@ section > h2 {
     background: #68483c;
 }
 
+/* ========================= CONTACTO ========================= */
+
 .contacto {
     background: #f5eee8;
 }
 
 .contacto h2 {
     font-family: 'Merriweather', serif;
+
     color: #30241f;
+
     font-size: 34px;
 }
 
 .contacto p {
     line-height: 1.8;
+
     color: #665750;
+
     font-family: 'Lato', sans-serif;
+
     font-size: 16px;
 }
 
@@ -246,17 +331,27 @@ section > h2 {
 
 .contacto a {
     color: #9a6b2f;
+
     font-weight: 700;
+
     text-decoration: none;
 }
 
+/* ========================= PIE ========================= */
+
 footer {
     background: #211914;
+
     color: white;
+
     padding: 25px;
+
     font-family: 'Lato', sans-serif;
+
     font-size: 14px;
 }
+
+/* ========================= MÓVIL ========================= */
 
 @media (max-width: 600px) {
 
@@ -270,6 +365,7 @@ footer {
 
     .imagen-principal {
         height: 220px;
+
         border-radius: 8px;
     }
 
@@ -279,18 +375,21 @@ footer {
 
     .libro {
         width: 85%;
+
         max-width: 320px;
     }
 
-    .reproductor-musica {
-        top: 10px;
-        right: 10px;
-        padding: 6px 8px;
+    .reproductor {
+        top: 8px;
+        right: 8px;
+
+        padding: 5px 8px;
     }
 
-    .nombre-cancion {
+    #nombreCancion {
         max-width: 100px;
     }
+
 }
 
 </style>
@@ -301,17 +400,19 @@ footer {
 
 <!-- ========================= REPRODUCTOR DE MÚSICA ========================= -->
 
-<div class="reproductor-musica">
+<div class="reproductor">
 
-<button id="botonMusica" aria-label="Reproducir música">▶</button>
+<button id="botonMusica" type="button">
+    ▶
+</button>
 
-<span id="nombreCancion" class="nombre-cancion">
+<span id="nombreCancion">
     Música
 </span>
 
 </div>
 
-<audio id="musica" preload="auto"></audio>
+<audio id="audio"></audio>
 
 <script>
 
@@ -321,78 +422,112 @@ const canciones = [
     "Todovaestarbien.mp3"
 ];
 
-const audio = document.getElementById("musica");
+const audio = document.getElementById("audio");
+
 const boton = document.getElementById("botonMusica");
-const nombre = document.getElementById("nombreCancion");
+
+const nombreCancion = document.getElementById("nombreCancion");
 
 let indiceActual = -1;
-let reproduciendo = false;
 
-/* Elegir una canción al azar */
 
-function siguienteCancion() {
+/* Elegir una canción aleatoria */
+
+function elegirCancion() {
 
     let nuevoIndice;
 
     do {
-        nuevoIndice = Math.floor(Math.random() * canciones.length);
-    } while (canciones.length > 1 && nuevoIndice === indiceActual);
+
+        nuevoIndice =
+            Math.floor(Math.random() * canciones.length);
+
+    } while (
+        canciones.length > 1 &&
+        nuevoIndice === indiceActual
+    );
 
     indiceActual = nuevoIndice;
 
     audio.src = canciones[indiceActual];
 
-    nombre.textContent = canciones[indiceActual]
+    nombreCancion.textContent =
+        canciones[indiceActual]
         .replace(".mp3", "")
         .replace(".m4a", "");
 
-    audio.play()
-        .then(() => {
-            reproduciendo = true;
-            boton.textContent = "❚❚";
-        })
-        .catch(() => {
-            reproduciendo = false;
-            boton.textContent = "▶";
-        });
 }
 
-/* Cuando termina una canción, elegir otra al azar */
 
-audio.addEventListener("ended", function() {
-    siguienteCancion();
-});
+/* Reproducir */
 
-/* Botón reproducir / pausar */
+function reproducir() {
+
+    audio.play()
+        .then(function() {
+
+            boton.textContent = "❚❚";
+
+        })
+        .catch(function() {
+
+            boton.textContent = "▶";
+
+        });
+
+}
+
+
+/* Botón */
 
 boton.addEventListener("click", function() {
 
     if (audio.paused) {
 
-        if (!audio.src || audio.src === window.location.href) {
-            siguienteCancion();
-        } else {
-            audio.play()
-                .then(() => {
-                    reproduciendo = true;
-                    boton.textContent = "❚❚";
-                });
+        if (!audio.src || audio.src.endsWith("/")) {
+
+            elegirCancion();
+
         }
+
+        reproducir();
 
     } else {
 
         audio.pause();
-        reproduciendo = false;
+
         boton.textContent = "▶";
 
     }
 
 });
 
-/* Intentar comenzar automáticamente */
+
+/* Cuando termina una canción */
+
+audio.addEventListener("ended", function() {
+
+    elegirCancion();
+
+    reproducir();
+
+});
+
+
+/* Preparar una canción */
+
+elegirCancion();
+
+
+/*
+   Intentar reproducir automáticamente.
+   Algunos navegadores bloquean el sonido automático.
+*/
 
 window.addEventListener("load", function() {
-    siguienteCancion();
+
+    reproducir();
+
 });
 
 </script>
@@ -407,9 +542,12 @@ window.addEventListener("load", function() {
 A veces, una palabra puede abrazar lo que el corazón no sabe decir.
 </p>
 
-<img src="Fondopag.png"
-  alt="Imagen principal de Luis Dornellez"
-  class="imagen-principal">
+<img
+src="Fondopag.png"
+alt="Imagen principal de Luis Dornellez"
+class="imagen-principal"
+
+
 
 </header>
 
@@ -421,12 +559,15 @@ A veces, una palabra puede abrazar lo que el corazón no sabe decir.
 
 <div class="libros">
 
-<!-- ========================= LIBRO 1 ========================= -->
+<!-- LIBRO 1 -->
 
 <div class="libro">
 
-<img src="Unpocodeamor.jpg"
-  alt="Portada de Un poco de amor propio">
+<img
+src="Unpocodeamor.jpg"
+alt="Portada de Un poco de amor propio"
+
+
 
 <h2>
 Un poco de amor propio
@@ -440,22 +581,27 @@ Un libro de poesía para sanar, reflexionar y volver a encontrarte contigo mismo
 $13 USD
 </div>
 
-<a class="comprar"
+<a
+class="comprar"
 href="https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4"
-target="_self">
+target="_self"
+
+
 
 Comprar libro aquí
-
 </a>
 
 </div>
 
-<!-- ========================= LIBRO 2 ========================= -->
+<!-- LIBRO 2 -->
 
 <div class="libro">
 
-<img src="Dondeelcora.jpg"
-  alt="Portada de Dónde el corazón aprende a quedarse">
+<img
+src="Dondeelcora.jpg"
+alt="Portada de Dónde el corazón aprende a quedarse"
+
+
 
 <h2>
 Dónde el corazón aprende a quedarse
@@ -469,12 +615,14 @@ Una historia de emociones, amor, heridas y esos lugares donde el corazón finalm
 $13 USD
 </div>
 
-<a class="comprar"
+<a
+class="comprar"
 href="https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4"
-target="_self">
+target="_self"
+
+
 
 Comprar libro aquí
-
 </a>
 
 </div>
@@ -504,24 +652,36 @@ de tu camino.
 
 </section>
 
-<!-- ========================= REDES SOCIALES ========================= -->
+<!-- ========================= REDES ========================= -->
 
 <section class="redes">
 
 <h2>Mis redes</h2>
 
-<a href="https://www.facebook.com/dorneelleez.luiis/"
-target="_blank">
+<a
+href="https://www.facebook.com/dorneelleez.luiis/"
+target="_blank"
+
+
+
 Facebook
 </a>
 
-<a href="https://instagram.com/"
-target="_blank">
+<a
+href="https://instagram.com/"
+target="_blank"
+
+
+
 Instagram
 </a>
 
-<a href="https://www.tiktok.com/@versosdelpensador"
-target="_blank">
+<a
+href="https://www.tiktok.com/@versosdelpensador"
+target="_blank"
+
+
+
 TikTok
 </a>
 
