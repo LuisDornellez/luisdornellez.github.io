@@ -1,145 +1,849 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Libros de Luis Dornellez</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
 
-<style> body { margin: 0; font-family: 'Lato', sans-serif; background: #f5eee8; color: #30241f; text-align: center; } header { background: #30241f; color: white; padding: 50px 20px; } header h1 { margin: 0; font-family: 'Merriweather', serif; font-size: 44px; font-weight: 900; letter-spacing: 0.5px; } header p { font-family: 'Lato', sans-serif; font-size: 19px; color: #eadbd1; margin-top: 12px; } .imagen-principal { width: 100%; max-width: 1000px; height: 320px; object-fit: cover; display: block; margin: 30px auto 0; border-radius: 12px; } section { padding: 45px 20px; } section > h2 { font-family: 'Merriweather', serif; font-size: 34px; font-weight: 700; margin-bottom: 30px; } .libros { max-width: 900px; margin: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; } .libro { background: white; width: 300px; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px #0002; } .libro img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; } .libro h2 { font-family: 'Merriweather', serif; font-size: 25px; font-weight: 700; color: #30241f; line-height: 1.3; } .libro p { font-family: 'Lato', sans-serif; line-height: 1.7; color: #665750; font-size: 16px; } .precio { font-family: 'Lato', sans-serif; font-size: 25px; font-weight: 900; margin: 20px; color: #9a6b2f; } .comprar { display: block; background: #30241f; color: white; padding: 15px; border-radius: 30px; text-decoration: none; font-family: 'Lato', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.3px; transition: 0.3s; } .comprar:hover { background: #68483c; transform: translateY(-2px); } .sobre { background: #30241f; color: white; } .sobre h2 { font-family: 'Merriweather', serif; color: #ead0a7; font-size: 34px; } .sobre p { max-width: 600px; margin: auto; line-height: 1.8; font-family: 'Lato', sans-serif; font-size: 16px; } .redes { background: white; } .redes h2 { font-family: 'Merriweather', serif; color: #30241f; font-size: 34px; } .redes a { display: inline-block; margin: 5px; padding: 12px 18px; background: #30241f; color: white; text-decoration: none; border-radius: 20px; font-family: 'Lato', sans-serif; font-weight: 700; transition: 0.3s; } .redes a:hover { background: #68483c; } .contacto { background: #f5eee8; } .contacto h2 { font-family: 'Merriweather', serif; color: #30241f; font-size: 34px; } .contacto p { line-height: 1.8; color: #665750; font-family: 'Lato', sans-serif; font-size: 16px; } .contacto strong { color: #30241f; } .contacto a { color: #9a6b2f; font-weight: 700; text-decoration: none; } footer { background: #211914; color: white; padding: 25px; font-family: 'Lato', sans-serif; font-size: 14px; } @media (max-width: 600px) { header h1 { font-size: 38px; } header p { font-size: 17px; } .imagen-principal { height: 220px; border-radius: 8px; } section > h2 { font-size: 30px; } .libro { width: 85%; max-width: 320px; } } </style>
+
+<style>
+
+/* =========================
+   ESTILO GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background: #f5eee8;
+    color: #30241f;
+    text-align: center;
+}
+
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+header {
+    position: relative;
+    background: #30241f;
+    color: white;
+
+    /* Menos espacio arriba y abajo */
+    padding: 90px 15px 35px;
+
+    overflow: hidden;
+}
+
+header h1 {
+    margin: 0;
+
+    font-family: 'Merriweather', serif;
+
+    font-size: 44px;
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+}
+
+header p {
+    max-width: 850px;
+
+    margin: 14px auto 25px;
+
+    font-family: 'Lato', sans-serif;
+
+    font-size: 19px;
+
+    line-height: 1.55;
+
+    color: #eadbd1;
+}
+
+
+/* =========================
+   REPRODUCTOR
+========================= */
+
+.reproductor {
+    position: absolute;
+
+    top: 16px;
+    right: 20px;
+
+    width: 205px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 6px 9px;
+
+    background: rgba(255,255,255,0.09);
+
+    border: 1px solid rgba(255,255,255,0.13);
+
+    border-radius: 25px;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.18);
+
+    z-index: 10;
+}
+
+
+.boton-musica {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #ead0a7;
+
+    color: #30241f;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition: 0.25s;
+}
+
+.boton-musica:hover {
+    transform: scale(1.08);
+
+    background: #f2dfc2;
+}
+
+
+.info-musica {
+    min-width: 0;
+
+    flex: 1;
+
+    text-align: left;
+}
+
+
+.titulo-musica {
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    margin-bottom: 4px;
+}
+
+
+.progreso {
+    width: 100%;
+
+    height: 3px;
+
+    background: rgba(255,255,255,0.25);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+
+.progreso-barra {
+    width: 0%;
+
+    height: 100%;
+
+    background: #ead0a7;
+}
+
+
+.tiempo {
+    color: #d9c8bd;
+
+    font-size: 8px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================
+   IMAGEN PRINCIPAL
+========================= */
+
+.imagen-principal {
+
+    width: 100%;
+
+    /* Ocupa mucho más espacio */
+
+    max-width: 1250px;
+
+    height: 500px;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    margin: 25px auto 0;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.25);
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+section {
+    padding: 55px 20px;
+}
+
+section > h2 {
+    font-family: 'Merriweather', serif;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    margin: 0 0 30px;
+}
+
+
+/* =========================
+   LIBROS
+========================= */
+
+.libros {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 25px;
+}
+
+.libro {
+    background: white;
+
+    width: 300px;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px #0002;
+}
+
+.libro img {
+    width: 100%;
+
+    height: 420px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+.libro h2 {
+    font-family: 'Merriweather', serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #30241f;
+
+    line-height: 1.3;
+}
+
+.libro p {
+    font-family: 'Lato', sans-serif;
+
+    line-height: 1.7;
+
+    color: #665750;
+
+    font-size: 16px;
+}
+
+.precio {
+    font-family: 'Lato', sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    margin: 20px;
+
+    color: #9a6b2f;
+}
+
+.comprar {
+    display: block;
+
+    background: #30241f;
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-family: 'Lato', sans-serif;
+
+    font-weight: 700;
+
+    font-size: 15px;
+
+    transition: 0.3s;
+}
+
+.comprar:hover {
+    background: #68483c;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   SOBRE MÍ
+========================= */
+
+.sobre {
+    background: #30241f;
+
+    color: white;
+
+    padding: 55px 20px 60px;
+}
+
+.sobre h2 {
+    font-family: 'Merriweather', serif;
+
+    color: #ead0a7;
+
+    font-size: 34px;
+
+    margin: 0 0 25px;
+}
+
+.sobre p {
+    max-width: 720px;
+
+    margin: 0 auto 10px;
+
+    line-height: 1.55;
+
+    font-family: 'Lato', sans-serif;
+
+    font-size: 18px;
+
+    color: #f5eee8;
+}
+
+.sobre p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================
+   REDES
+========================= */
+
+.redes {
+    background: white;
+}
+
+.redes h2 {
+    font-family: 'Merriweather', serif;
+
+    color: #30241f;
+
+    font-size: 34px;
+}
+
+.redes a {
+    display: inline-block;
+
+    margin: 5px;
+
+    padding: 12px 18px;
+
+    background: #30241f;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 20px;
+
+    font-family: 'Lato', sans-serif;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.redes a:hover {
+    background: #68483c;
+}
+
+
+/* =========================
+   CONTACTO
+========================= */
+
+.contacto {
+    background: #f5eee8;
+}
+
+.contacto h2 {
+    font-family: 'Merriweather', serif;
+
+    color: #30241f;
+
+    font-size: 34px;
+}
+
+.contacto p {
+    line-height: 1.8;
+
+    color: #665750;
+
+    font-family: 'Lato', sans-serif;
+
+    font-size: 16px;
+}
+
+.contacto strong {
+    color: #30241f;
+}
+
+.contacto a {
+    color: #9a6b2f;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   PIE DE PÁGINA
+========================= */
+
+footer {
+    background: #211914;
+
+    color: white;
+
+    padding: 25px;
+
+    font-family: 'Lato', sans-serif;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   CELULARES
+========================= */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 82px 10px 25px;
+    }
+
+    header h1 {
+        font-size: 36px;
+    }
+
+    header p {
+        font-size: 17px;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* Reproductor */
+
+    .reproductor {
+        top: 13px;
+
+        right: 12px;
+
+        width: 180px;
+
+        height: 43px;
+    }
+
+    .boton-musica {
+        width: 30px;
+        height: 30px;
+    }
+
+    .titulo-musica {
+        font-size: 10px;
+    }
+
+
+    /* Imagen mucho más grande */
+
+    .imagen-principal {
+
+        width: 100%;
+
+        height: 360px;
+
+        margin-top: 20px;
+
+        border-radius: 10px;
+    }
+
+
+    section {
+        padding: 45px 20px;
+    }
+
+    section > h2 {
+        font-size: 30px;
+    }
+
+
+    .libro {
+        width: 90%;
+
+        max-width: 320px;
+    }
+
+
+    .sobre {
+        padding: 45px 20px 50px;
+    }
+
+    .sobre h2 {
+        font-size: 30px;
+    }
+
+    .sobre p {
+        font-size: 16px;
+
+        line-height: 1.55;
+    }
+
+}
+
+</style>
 
 </head>
 
+
 <body>
 
-<!-- ========================= ENCABEZADO ========================= -->
+
+<!-- =========================
+     ENCABEZADO
+========================= -->
 
 <header>
 
-<h1> Luis Dornellez </h1>
 
-<p> A veces, una palabra puede abrazar lo que el corazón no sabe decir. </p>
+<!-- REPRODUCTOR -->
 
-<img src="Fondopag.png" alt="Imagen principal de Luis Dornellez" class="imagen-principal">
+<div class="reproductor">
+
+    <button
+        class="boton-musica"
+        id="botonMusica"
+        aria-label="Reproducir música"
+    >
+        ▶
+    </button>
+
+
+    <div class="info-musica">
+
+        <div class="titulo-musica">
+            🎵 Música creada por mí
+        </div>
+
+
+        <div
+            class="progreso"
+            id="progreso"
+        >
+
+            <div
+                class="progreso-barra"
+                id="progresoBarra"
+            ></div>
+
+        </div>
+
+
+        <div
+            class="tiempo"
+            id="tiempo"
+        >
+            0:00
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- AUDIO -->
+
+<audio
+    id="musica"
+    src="Música creada por mi.mp3"
+    preload="metadata"
+></audio>
+
+
+<!-- TÍTULO -->
+
+<h1>
+    Luis Dornellez
+</h1>
+
+
+<p>
+    A veces, una palabra puede abrazar lo que el corazón no sabe decir.
+</p>
+
+
+<!-- IMAGEN GRANDE -->
+
+<img
+    src="Fondopag.png"
+    alt="Imagen principal de Luis Dornellez"
+    class="imagen-principal"
+>
+
 
 </header>
 
-<!-- ========================= LIBROS ========================= -->
+
+
+<!-- =========================
+     LIBROS
+========================= -->
 
 <section>
 
-<h2> Mis libros </h2>
+<h2>
+    Mis libros
+</h2>
+
 
 <div class="libros">
 
-<!-- ========================= LIBRO 1 ========================= -->
+
+<!-- LIBRO 1 -->
 
 <div class="libro">
 
-<img src="Unpocodeamor.jpg" alt="Portada de Un poco de amor propio">
+<img
+    src="Unpocodeamor.jpg"
+    alt="Portada de Un poco de amor propio"
+>
 
-<h2> Un poco de amor propio </h2>
+<h2>
+    Un poco de amor propio
+</h2>
 
-<p> Un libro de poesía para sanar, reflexionar y volver a encontrarte contigo mismo. </p>
+<p>
+    Un libro de poesía para sanar,
+    reflexionar y volver a encontrarte
+    contigo mismo.
+</p>
 
-<div class="precio"> $13,22 USD </div>
+<div class="precio">
+    $13,22 USD
+</div>
 
-<a class="comprar" href="https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4" target="_self">
-
-Comprar libro aquí
-
+<a
+    class="comprar"
+    href="https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4"
+    target="_self"
+>
+    Comprar libro aquí
 </a>
 
 </div>
 
-<!-- ========================= LIBRO 2 ========================= -->
+
+
+<!-- LIBRO 2 -->
 
 <div class="libro">
 
-<img src="Dondeelcora.jpg" alt="Portada de Dónde el corazón aprende a quedarse">
+<img
+    src="Dondeelcora.jpg"
+    alt="Portada de Dónde el corazón aprende a quedarse"
+>
 
-<h2> Dónde el corazón aprende a quedarse </h2>
+<h2>
+    Dónde el corazón aprende a quedarse
+</h2>
 
-<p> Una historia de emociones, amor, heridas y esos lugares donde el corazón finalmente encuentra un hogar. </p>
+<p>
+    Una historia de emociones, amor,
+    heridas y esos lugares donde
+    el corazón finalmente encuentra
+    un hogar.
+</p>
 
-<div class="precio"> $12,09 USD </div>
+<div class="precio">
+    $12,09 USD
+</div>
 
-<a class="comprar" href="https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4" target="_self">
-
-Comprar libro aquí
-
+<a
+    class="comprar"
+    href="https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4"
+    target="_self"
+>
+    Comprar libro aquí
 </a>
 
 </div>
+
 
 </div>
 
 </section>
 
-<!-- ========================= SOBRE MÍ ========================= -->
+
+
+<!-- =========================
+     SOBRE MÍ
+========================= -->
 
 <section class="sobre">
 
-<h2> Sobre mí </h2>
+<h2>
+    Sobre mí
+</h2>
 
 <p>
+    Soy Luis Dornellez, escritor y poeta.
+</p>
 
-Soy Luis Dornellez, escritor y poeta.
+<p>
+    Escribo sobre amor propio, sanación,
+    emociones y esperanza.
+</p>
 
-Escribo sobre amor propio,
-sanación, emociones y esperanza.
-
-Espero que mis palabras puedan
-acompañarte en algún momento
-de tu camino.
-
+<p>
+    Espero que mis palabras puedan acompañarte
+    en algún momento de tu camino.
 </p>
 
 </section>
 
-<!-- ========================= REDES SOCIALES ========================= -->
+
+
+<!-- =========================
+     REDES
+========================= -->
 
 <section class="redes">
 
-<h2> Mis redes </h2>
+<h2>
+    Mis redes
+</h2>
 
-<a href="https://www.facebook.com/dorneelleez.luiis/" target="_blank">
-
-Facebook
-
+<a
+    href="https://www.facebook.com/dorneelleez.luiis/"
+    target="_blank"
+>
+    Facebook
 </a>
 
-<a href="https://instagram.com/" target="_blank">
-
-Instagram
-
+<a
+    href="https://instagram.com/"
+    target="_blank"
+>
+    Instagram
 </a>
 
-<a href="https://www.tiktok.com/@versosdelpensador" target="_blank">
-
-TikTok
-
+<a
+    href="https://www.tiktok.com/@versosdelpensador"
+    target="_blank"
+>
+    TikTok
 </a>
 
 </section>
 
-<!-- ========================= CONTACTO ========================= -->
+
+
+<!-- =========================
+     CONTACTO
+========================= -->
 
 <section class="contacto">
 
-<h2> Contacto </h2>
+<h2>
+    Contacto
+</h2>
 
 <p>
 
-<strong> Número de contacto: </strong>
+<strong>
+    Número de contacto:
+</strong>
 
 <br>
 
@@ -149,17 +853,25 @@ TikTok
 
 <p>
 
-<strong> Correo electrónico: </strong>
+<strong>
+    Correo electrónico:
+</strong>
 
 <br>
 
-<a href="mailto:elpoetik@gmail.com"> elpoetik@gmail.com </a>
+<a href="mailto:elpoetik@gmail.com">
+    elpoetik@gmail.com
+</a>
 
 </p>
 
 </section>
 
-<!-- ========================= PIE DE PÁGINA ========================= -->
+
+
+<!-- =========================
+     PIE
+========================= -->
 
 <footer>
 
@@ -167,7 +879,121 @@ TikTok
 
 </footer>
 
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+const musica =
+    document.getElementById("musica");
+
+const boton =
+    document.getElementById("botonMusica");
+
+const progreso =
+    document.getElementById("progreso");
+
+const progresoBarra =
+    document.getElementById("progresoBarra");
+
+const tiempo =
+    document.getElementById("tiempo");
+
+
+/* REPRODUCIR / PAUSAR */
+
+boton.addEventListener("click", function() {
+
+    if (musica.paused) {
+
+        musica.play();
+
+        boton.textContent = "❚❚";
+
+    } else {
+
+        musica.pause();
+
+        boton.textContent = "▶";
+
+    }
+
+});
+
+
+/* PROGRESO */
+
+musica.addEventListener("timeupdate", function() {
+
+    if (musica.duration) {
+
+        const porcentaje =
+            (musica.currentTime /
+            musica.duration) * 100;
+
+        progresoBarra.style.width =
+            porcentaje + "%";
+    }
+
+
+    const minutos =
+        Math.floor(
+            musica.currentTime / 60
+        );
+
+
+    const segundos =
+        Math.floor(
+            musica.currentTime % 60
+        )
+        .toString()
+        .padStart(2, "0");
+
+
+    tiempo.textContent =
+        minutos + ":" + segundos;
+
+});
+
+
+/* AL TERMINAR */
+
+musica.addEventListener("ended", function() {
+
+    boton.textContent = "▶";
+
+    progresoBarra.style.width = "0%";
+
+});
+
+
+/* BARRA DE PROGRESO */
+
+progreso.addEventListener("click", function(e) {
+
+    if (!musica.duration) return;
+
+
+    const ancho =
+        progreso.clientWidth;
+
+
+    const posicion =
+        e.offsetX;
+
+
+    musica.currentTime =
+        (posicion / ancho) *
+        musica.duration;
+
+});
+
+</script>
+
+
 </body>
 
 </html>
-
