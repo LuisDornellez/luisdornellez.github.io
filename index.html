@@ -2,18 +2,23 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luis Dornellez | Escritor y poeta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luis Dornellez | Escritor y poeta de Uruguay</title>
 <meta name="description" content="Libros de poesía y emociones de Luis Dornellez, escritor y poeta de Uruguay: «Un poco de amor propio» y «Donde el corazón aprende a quedarse». Lee un adelanto y cómpralos en Lulu.">
+<meta name="author" content="Luis Dornellez">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="google" content="notranslate">
-<meta name="theme-color" content="#30241f">
+<meta name="theme-color" content="#120e0b">
+<meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://luisdornellez.github.io/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Luis Dornellez">
 <meta property="og:locale" content="es_LA">
-<meta property="og:title" content="Luis Dornellez | Escritor y poeta">
+<meta property="og:title" content="Luis Dornellez | Escritor y poeta de Uruguay">
 <meta property="og:description" content="A veces, una palabra puede abrazar lo que el corazón no sabe decir.">
 <meta property="og:url" content="https://luisdornellez.github.io/">
 <meta property="og:image" content="https://luisdornellez.github.io/og-image.png">
@@ -21,259 +26,225 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Luis Dornellez, escritor y poeta">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Luis Dornellez | Escritor y poeta de Uruguay">
+<meta name="twitter:description" content="A veces, una palabra puede abrazar lo que el corazón no sabe decir.">
 <meta name="twitter:image" content="https://luisdornellez.github.io/og-image.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--crema:#f5eee8;--cafe:#30241f;--cafe-2:#68483c;--oro:#ead0a7;--bronce:#8a5d24;--texto:#4d3f38;--radio:14px;
---serif:'Cormorant Garamond',Georgia,serif;--sans:'Lato',system-ui,sans-serif}
+:root{color-scheme:dark;--bg:#120e0b;--s1:#1b1511;--s2:#241b15;--bd:rgba(234,208,167,.15);--tx:#f4eadf;--mu:#bcab9b;--oro:#ead0a7;--a1:#f6c977;--a2:#e4874a;--fd:'Fraunces',Georgia,serif;--fb:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font:400 17px/1.7 var(--sans);background:var(--crema);color:var(--texto)}
-img{max-width:100%;display:block}
-h1,h2,h3{font-family:var(--serif);color:var(--cafe);line-height:1.15;margin:0}
-a{color:var(--bronce)}
-:focus-visible{outline:3px solid var(--bronce);outline-offset:3px}
-.skip{position:absolute;left:12px;top:-60px;z-index:20;background:var(--oro);color:var(--cafe);padding:10px 16px;border-radius:8px}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;font:400 17px/1.7 var(--fb);background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+a{color:var(--a1)}
+:focus-visible{outline:3px solid var(--a1);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;left:12px;top:-70px;z-index:50;background:var(--a1);color:#1a120c;padding:10px 16px;border-radius:999px;font-weight:600}
 .skip:focus{top:12px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
-/* Encabezado */
-.cabecera{position:relative;background:var(--cafe);text-align:center;padding:96px 20px 0}
-.cabecera h1{color:#fff;font-size:clamp(3rem,9vw,5.75rem);font-weight:600;letter-spacing:.01em}
-.lema{max-width:30ch;margin:16px auto 40px;font-family:var(--serif);font-style:italic;font-size:clamp(1.35rem,3vw,1.85rem);line-height:1.4;color:var(--oro)}
-.hero{width:100%;max-width:1200px;height:clamp(260px,48vw,520px);margin:0 auto;object-fit:cover;object-position:center;border-radius:var(--radio) var(--radio) 0 0}
+/* Barra flotante de cristal */
+.nav-wrap{position:fixed;top:14px;left:0;right:0;z-index:30;padding:0 14px;pointer-events:none}
+.nav{pointer-events:auto;max-width:880px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 22px;background:rgba(27,21,17,.68);border:1px solid var(--bd);border-radius:999px;-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);box-shadow:0 12px 40px -12px rgba(0,0,0,.7)}
+.brand{font:700 1.2rem var(--fd);color:var(--tx);text-decoration:none;margin-right:auto;white-space:nowrap}
+.nav ul{display:flex;gap:2px;margin:0;padding:0;list-style:none}
+.nav ul a{display:block;padding:8px 14px;border-radius:999px;color:var(--mu);font-size:.95rem;font-weight:500;text-decoration:none;transition:color .2s,background .2s}
+.nav ul a:hover{color:var(--tx);background:rgba(255,255,255,.07)}
 
-/* Reproductor */
-.player{position:absolute;top:16px;right:16px;z-index:5;display:flex;align-items:center;gap:10px;width:250px;padding:8px 16px 8px 8px;text-align:left;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.player[hidden]{display:none}
-.player button{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:var(--oro);color:var(--cafe);font-size:15px;cursor:pointer;transition:background .25s}
-.player button:hover{background:#f4e3c6}
-.player-info{flex:1;min-width:0}
-.player-titulo{font-size:13px;font-weight:700;line-height:1.3;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.barra{position:relative;display:flex;align-items:center;height:16px;cursor:pointer}
-.barra::before{content:"";position:absolute;left:0;right:0;height:4px;border-radius:4px;background:rgba(255,255,255,.28)}
-.barra i{position:relative;display:block;width:0;height:4px;border-radius:4px;background:var(--oro)}
-.player-tiempo{font-size:12px;line-height:1;color:#e2d3c8;font-variant-numeric:tabular-nums}
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border:1px solid transparent;border-radius:999px;background:linear-gradient(135deg,var(--a1),var(--a2));color:#1a120c;font:600 .98rem var(--fb);text-decoration:none;cursor:pointer;box-shadow:0 10px 30px -10px rgba(228,135,74,.65);transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(228,135,74,.85)}
+.btn-sm{padding:10px 20px;font-size:.92rem}
+.btn-ghost{background:rgba(255,255,255,.05);border-color:var(--bd);color:var(--tx);box-shadow:none}
+.btn-ghost:hover{background:rgba(255,255,255,.1);box-shadow:none}
+
+/* Portada */
+.hero{position:relative;padding:150px 0 72px;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-10% 0 auto;height:720px;background:radial-gradient(45% 55% at 25% 30%,rgba(246,201,119,.2),transparent 70%),radial-gradient(40% 50% at 78% 20%,rgba(228,135,74,.22),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:7px 16px;border:1px solid var(--bd);border-radius:999px;background:rgba(255,255,255,.05);color:var(--oro);font-size:.92rem;font-weight:500}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a1);box-shadow:0 0 12px var(--a1)}
+.hero h1{margin:26px 0 20px;font-size:clamp(3.2rem,10.5vw,7rem);background:linear-gradient(120deg,#fff3dc 10%,var(--a1) 50%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lema{max-width:34ch;margin:0 auto 36px;font:500 clamp(1.3rem,3vw,1.75rem)/1.45 var(--fd);font-style:italic;color:var(--oro)}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.hero-img{position:relative;margin:64px auto 0;max-width:980px;padding:10px;border:1px solid var(--bd);border-radius:32px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02));box-shadow:0 40px 100px -30px rgba(228,135,74,.35),0 30px 60px -30px #000}
+.hero-img img{width:100%;border-radius:24px;aspect-ratio:1376/768;object-fit:cover}
+.hero .badge,.hero h1,.hero .lema,.hero .cta,.hero-img{animation:entra .8s cubic-bezier(.2,.7,.2,1) both}
+.hero h1{animation-delay:.08s}.hero .lema{animation-delay:.16s}.hero .cta{animation-delay:.24s}.hero-img{animation-delay:.34s}
+@keyframes entra{from{opacity:0;transform:translateY(18px)}}
 
 /* Secciones */
-.seccion{padding:80px 20px}
-.contenedor{max-width:1000px;margin:0 auto}
-.titulo-seccion{text-align:center;font-size:clamp(2.3rem,5vw,3.2rem);margin-bottom:40px}
+.sec{padding:96px 0}
+.cab{max-width:620px;margin:0 auto 52px;text-align:center}
+.cab h2{font-size:clamp(2.2rem,5vw,3.4rem)}
+.cab p{margin-top:14px;color:var(--mu)}
+.card{background:linear-gradient(180deg,var(--s2),var(--s1));border:1px solid var(--bd);border-radius:28px;box-shadow:0 30px 60px -36px #000}
 
 /* Libros */
-.libros{display:grid;gap:28px}
-.libro{display:grid;grid-template-columns:minmax(0,400px) 1fr;gap:40px;align-items:center;padding:24px;background:#fff;border-radius:var(--radio);box-shadow:0 8px 28px rgba(48,36,31,.12)}
-.libro img{width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(48,36,31,.25)}
-.portada-vacia{width:100%;max-width:300px;justify-self:center;aspect-ratio:2/3;display:grid;place-items:center;padding:24px;background:var(--cafe);color:var(--oro);font:600 1.7rem/1.2 var(--serif);text-align:center;border-radius:6px;box-shadow:0 6px 18px rgba(48,36,31,.25)}
-.libro h3{font-size:clamp(1.9rem,3.5vw,2.4rem);margin-bottom:10px}
-.libro p{margin:0 0 16px}
-.precio{margin-bottom:20px;font-size:1.5rem;font-weight:900;color:var(--bronce)}
-.boton{display:inline-block;padding:14px 28px;background:var(--cafe);color:#fff;font-weight:700;text-decoration:none;border-radius:999px;transition:background .25s}
-.boton:hover{background:var(--cafe-2)}
-
-/* Adelanto de cada libro */
-.acciones{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
-.boton-suave{padding:12px 26px;background:transparent;color:var(--cafe);border:2px solid var(--cafe);font:700 1rem var(--sans);cursor:pointer;transition:background .25s,color .25s}
-.boton-suave:hover{background:var(--cafe);color:#fff}
-.adelanto{grid-column:1/-1;margin-top:4px;padding:26px 30px;background:var(--crema);border-left:4px solid var(--bronce);border-radius:0 10px 10px 0}
-.adelanto[hidden]{display:none}
-.adelanto .adelanto-texto{max-width:52ch;margin:0 auto 12px;font:500 italic clamp(1.25rem,2.6vw,1.5rem)/1.6 var(--serif);color:var(--cafe)}
-.adelanto .adelanto-poema{max-width:none;text-align:center}
-.adelanto .adelanto-pie{max-width:52ch;margin:0 auto;font-size:.95rem;color:var(--bronce);font-weight:700}
-.adelanto-pie a{font-weight:700}
+.libros{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;align-items:start}
+.libro{display:flex;flex-direction:column;gap:22px;padding:28px}
+.libro .portada{display:flex;justify-content:center;padding:26px;border-radius:20px;background:radial-gradient(70% 70% at 50% 40%,rgba(246,201,119,.16),rgba(255,255,255,.02))}
+.libro .portada img{width:min(100%,230px);border-radius:8px;box-shadow:0 26px 44px -14px #000,0 0 0 1px rgba(255,255,255,.08)}
+.portada-vacia{width:min(100%,230px);aspect-ratio:2/3;display:grid;place-items:center;padding:20px;border-radius:8px;background:var(--s1);color:var(--oro);font:700 1.4rem/1.2 var(--fd);text-align:center}
+.libro h3{font-size:clamp(1.6rem,3vw,2rem)}
+.libro p{color:var(--mu)}
+.precio{align-self:flex-start;padding:5px 14px;border:1px solid var(--bd);border-radius:999px;background:rgba(246,201,119,.1);color:var(--a1);font-weight:600;font-size:.95rem}
+.acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.adelanto summary{list-style:none;cursor:pointer;user-select:none}
+.adelanto summary::-webkit-details-marker{display:none}
+.adelanto summary::after{content:"";width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
+.adelanto[open] summary::after{transform:rotate(-135deg)}
+.adelanto-texto{margin-top:16px;padding:22px 24px;border-left:3px solid var(--a2);border-radius:0 16px 16px 0;background:rgba(255,255,255,.04);font:500 italic 1.2rem/1.65 var(--fd);color:var(--tx);animation:entra .35s both}
+.adelanto-texto small{display:block;margin-top:12px;font:600 .88rem var(--fb);font-style:normal;color:var(--a1)}
 
 /* Sobre mí */
-.sobre{background:var(--cafe);color:var(--crema)}
-.sobre .titulo-seccion{color:var(--oro)}
-.autor{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:48px;align-items:center;max-width:820px;margin:0 auto}
-.foto-autor{width:100%;height:auto;border-radius:6px;border:1px solid rgba(234,208,167,.55);box-shadow:0 0 0 6px rgba(234,208,167,.08),0 18px 44px rgba(0,0,0,.55),0 0 60px rgba(234,160,90,.12)}
-.autor p{max-width:56ch;margin:0 0 14px;font-size:1.15rem}
-.autor .cita{margin:22px 0 0;font:italic 500 1.55rem/1.35 var(--serif);color:var(--oro)}
+.autor{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:48px;align-items:center;padding:28px}
+.autor img{width:100%;border-radius:22px;aspect-ratio:912/1236;object-fit:cover;box-shadow:0 0 0 1px var(--bd),0 30px 70px -24px rgba(228,135,74,.4)}
+.autor h2{font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:22px}
+.autor p+p{margin-top:14px}
+.autor p{color:var(--mu);max-width:54ch}
+.autor .cita{margin-top:26px;font:700 italic clamp(1.6rem,3.5vw,2.1rem)/1.2 var(--fd);color:var(--oro)}
 
-/* Redes y contacto */
-.redes{background:#fff;text-align:center}
-.lista-redes{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:0;padding:0;list-style:none}
-.contacto{text-align:center}
-.contacto p{margin:0 0 20px}
-.contacto strong{color:var(--cafe)}
-.contacto a{font-weight:700;text-decoration:none}
-.contacto a:hover{text-decoration:underline}
+/* Redes */
+.redes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:640px;margin:0 auto;padding:0;list-style:none}
+.red{display:flex;align-items:center;gap:16px;padding:20px 22px;color:var(--tx);font-weight:600;text-decoration:none;transition:transform .2s,border-color .2s}
+.red:hover{transform:translateY(-3px);border-color:rgba(246,201,119,.5)}
+.red i{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--a1),var(--a2))}
+.red svg{width:24px;height:24px;fill:#1a120c}
+.red span{display:block;font-weight:400;font-size:.88rem;color:var(--mu)}
 
-footer{padding:28px 20px;background:#211914;color:#d9c8bd;font-size:14px;text-align:center}
+/* Contacto */
+.contacto{position:relative;padding:64px 24px;text-align:center;overflow:hidden;background:radial-gradient(60% 90% at 50% 0%,rgba(228,135,74,.3),transparent 70%),linear-gradient(180deg,var(--s2),var(--s1))}
+.contacto h2{font-size:clamp(2.2rem,5vw,3.4rem)}
+.contacto p{margin:14px auto 28px;max-width:40ch;color:var(--mu)}
+.correo{margin-top:18px;font-size:.95rem;color:var(--oro)}
 
-/* Refinamiento profesional */
-body{font-size:17.5px;line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-h1,h2,h3{text-wrap:balance}
-.cabecera{padding-top:110px;background:radial-gradient(90% 70% at 50% 0%,#4b372e 0%,var(--cafe) 65%)}
-.cabecera h1{font-size:clamp(3.2rem,10vw,6.75rem);letter-spacing:.015em;animation:sube .9s cubic-bezier(.2,.7,.2,1) both}
-.lema{margin:0 auto 48px;animation:sube .9s .15s cubic-bezier(.2,.7,.2,1) both}
-.lema::before{content:"";display:block;width:56px;height:2px;margin:0 auto 22px;background:var(--oro);opacity:.8}
-.hero{border-radius:12px 12px 0 0;box-shadow:0 -1px 0 rgba(234,208,167,.35)}
-@keyframes sube{from{opacity:0;transform:translateY(14px)}}
-.seccion{padding:104px 20px}
-.titulo-seccion{margin-bottom:56px}
-.titulo-seccion::after{content:"";display:block;width:48px;height:2px;margin:18px auto 0;background:var(--bronce)}
-.sobre .titulo-seccion::after{background:var(--oro)}
-.libros{gap:36px}
-.libro{grid-template-columns:minmax(0,380px) 1fr;gap:56px;padding:36px;background:#fffdfb;border:1px solid rgba(48,36,31,.12);box-shadow:0 1px 2px rgba(48,36,31,.06),0 24px 48px -24px rgba(48,36,31,.28)}
-.libro:nth-child(even){grid-template-columns:1fr minmax(0,380px)}
-.libro:nth-child(even)>img,.libro:nth-child(even)>.portada-vacia{order:2}
-.libro img{box-shadow:0 2px 4px rgba(48,36,31,.2),0 18px 36px -12px rgba(48,36,31,.45)}
-.libro h3{font-size:clamp(2rem,3.6vw,2.6rem);margin-bottom:14px}
-.libro p{font-size:1.05rem}
-.precio{margin:22px 0 26px;font:600 1.9rem/1 var(--serif);letter-spacing:.01em}
-.boton{padding:14px 30px;font-size:.95rem;letter-spacing:.03em;box-shadow:0 6px 16px -6px rgba(48,36,31,.5)}
-.boton:hover{background:var(--bronce)}
-.boton-suave{padding:12px 28px;box-shadow:none}
-.boton-suave:hover{background:var(--cafe)}
-.adelanto{padding:32px 36px;background:#f7f0e9;border-left:3px solid var(--bronce)}
-.sobre{background:radial-gradient(80% 90% at 20% 20%,#3d2e27 0%,var(--cafe) 70%)}
-.redes{background:#ede3d9}
-.contacto a{padding-bottom:2px;border-bottom:1px solid var(--bronce);font:600 clamp(1.5rem,3.5vw,2rem)/1.3 var(--serif);color:var(--cafe)}
-.contacto a:hover{color:var(--bronce);text-decoration:none}
-.contacto a.boton{padding:14px 30px;border-bottom:0;font:700 .95rem/1.75 var(--sans);color:#fff}
-.contacto a.boton:hover{background:var(--bronce);color:#fff}
-.contacto .correo-texto{margin:-4px 0 0;font-size:.95rem;color:var(--cafe-2)}
-footer{padding:48px 20px 40px}
-.pie{display:grid;justify-items:center;gap:16px;max-width:1000px;margin:0 auto}
-.pie strong{font:600 1.7rem var(--serif);color:var(--oro)}
-.pie nav{display:flex;gap:28px}
-.pie a{color:#d9c8bd;text-decoration:none}
-.pie a:hover{color:var(--oro)}
-.pie p{margin:8px 0 0;font-size:13.5px;opacity:.8}
+/* Pie */
+footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
+.pie{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px}
+.pie strong{display:block;margin-bottom:8px;font:700 1.5rem var(--fd)}
+.pie p{max-width:32ch;color:var(--mu);font-size:.95rem}
+.pie nav{display:flex;flex-wrap:wrap;gap:8px 24px;align-content:flex-start}
+.pie nav a{color:var(--mu);text-decoration:none}
+.pie nav a:hover{color:var(--a1)}
+.copy{margin-top:36px;padding-top:24px;border-top:1px solid var(--bd);color:var(--mu);font-size:.88rem}
 
-/* Reproductor refinado */
-.player{width:272px;gap:14px;padding:9px 20px 9px 9px;background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid rgba(234,208,167,.28);box-shadow:0 10px 30px -10px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.player button{display:grid;place-items:center;width:46px;height:46px;padding:0;background:linear-gradient(145deg,#f4e3c6,var(--oro) 55%,#d6b783);box-shadow:0 4px 12px -2px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .2s,box-shadow .25s}
-.player button:hover{background:linear-gradient(145deg,#fbeed6,#ecd3a9 55%,#dcbf8d);transform:scale(1.05)}
-.player button svg{width:20px;height:20px;fill:var(--cafe)}
-.player .i-pausa{display:none}
-.player.sonando .i-play{display:none}
+/* Reproductor flotante */
+.player{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:12px;width:282px;padding:8px 20px 8px 8px;background:rgba(27,21,17,.78);border:1px solid var(--bd);border-radius:999px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 18px 44px -14px #000}
+.player[hidden]{display:none}
+.player button{flex:none;display:grid;place-items:center;width:46px;height:46px;padding:0;border:0;border-radius:50%;background:linear-gradient(135deg,var(--a1),var(--a2));cursor:pointer;transition:transform .2s}
+.player button:hover{transform:scale(1.06)}
+.player svg{width:20px;height:20px;fill:#1a120c}
+.i-pausa,.player.sonando .i-play{display:none}
 .player.sonando .i-pausa{display:block}
-.player.sonando button{box-shadow:0 0 0 5px rgba(234,208,167,.16),0 4px 12px -2px rgba(0,0,0,.5)}
-.player-cab{display:flex;align-items:center;gap:8px}
-.player .player-titulo{flex:1;min-width:0;font:italic 500 1.05rem/1.3 var(--serif);color:var(--crema)}
-.eq{display:flex;align-items:flex-end;flex:none;gap:2px;height:12px}
-.eq i{width:2px;height:3px;border-radius:2px;background:var(--oro);opacity:.75}
-.player.sonando .eq i{animation:eq 1s ease-in-out infinite}
-.player.sonando .eq i:nth-child(2){animation-delay:-.4s}
-.player.sonando .eq i:nth-child(3){animation-delay:-.75s}
-@keyframes eq{0%,100%{height:3px}50%{height:12px}}
-.barra{height:18px}
-.barra::before{background:rgba(255,255,255,.22)}
-.barra i{background:linear-gradient(90deg,#d6b783,var(--oro))}
-.barra i::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;border-radius:50%;background:#fbeed6;box-shadow:0 1px 4px rgba(0,0,0,.5);transform:translateY(-50%) scale(0);transition:transform .2s}
-.barra:hover i::after,.barra:focus-visible i::after,.player.sonando .barra i::after{transform:translateY(-50%) scale(1)}
-.player-tiempo{margin-top:1px;font-size:11.5px;letter-spacing:.04em;color:#d9c8bd}
+.player.sonando button{box-shadow:0 0 0 5px rgba(246,201,119,.18)}
+.p-info{flex:1;min-width:0}
+.p-tit{overflow:hidden;font:italic 500 1.02rem/1.3 var(--fd);white-space:nowrap;text-overflow:ellipsis}
+.barra{position:relative;display:flex;align-items:center;height:16px;cursor:pointer}
+.barra::before{content:"";position:absolute;left:0;right:0;height:4px;border-radius:4px;background:rgba(255,255,255,.2)}
+.barra i{position:relative;display:block;width:0;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--a1),var(--a2))}
+.p-tiempo{font-size:11.5px;line-height:1;color:var(--mu);font-variant-numeric:tabular-nums}
 
-@media (max-width:700px){
-  .seccion{padding:56px 20px}
-  .libro{grid-template-columns:1fr;gap:24px;text-align:center}
-  .portada-vacia{margin:0 auto}
-  .acciones{justify-content:center}
-  .adelanto{padding:22px 20px;text-align:left}
-  .autor{grid-template-columns:1fr;gap:28px;text-align:center}
-  .foto-autor{max-width:240px;margin:0 auto}
+@media (max-width:860px){
+  .libros,.autor{grid-template-columns:1fr}
+  .autor{gap:30px;text-align:center}
+  .autor img{max-width:280px;margin:0 auto}
   .autor p{margin-left:auto;margin-right:auto}
 }
-@media (max-width:600px){
-  .cabecera{padding-top:92px}
-  .player{top:14px;right:12px;width:230px}
+@media (max-width:640px){
+  .nav ul{display:none}
+  .hero{padding:118px 0 56px}
+  .sec{padding:68px 0}
+  .redes{grid-template-columns:1fr}
+  .hero-img{padding:6px;border-radius:24px;margin-top:48px}
+  .hero-img img{border-radius:18px}
+  .player{left:16px;right:16px;width:auto}
+  footer{margin-top:68px;padding-bottom:96px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *{transition:none!important}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
-@media (max-width:700px){
-  .seccion{padding:72px 20px}
-  .libro,.libro:nth-child(even){grid-template-columns:1fr;gap:28px;padding:24px}
-  .libro:nth-child(even)>img,.libro:nth-child(even)>.portada-vacia{order:0}
-  .adelanto{padding:24px 22px}
-}
-@media (prefers-reduced-motion:reduce){.cabecera h1,.lema,.player.sonando .eq i{animation:none}}
 </style>
-
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Luis Dornellez","jobTitle":"Escritor y poeta","image":"https://luisdornellez.github.io/autor-sombra.jpg","nationality":{"@type":"Country","name":"Uruguay"},"email":"elpoetik@gmail.com","sameAs":["https://www.facebook.com/dorneelleez.luiis/","https://www.tiktok.com/@versosdelpensador"]}
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","@id":"https://luisdornellez.github.io/#web","url":"https://luisdornellez.github.io/","name":"Luis Dornellez","inLanguage":"es","publisher":{"@id":"https://luisdornellez.github.io/#autor"}},
+{"@type":"Person","@id":"https://luisdornellez.github.io/#autor","name":"Luis Dornellez","jobTitle":"Escritor y poeta","url":"https://luisdornellez.github.io/","image":"https://luisdornellez.github.io/autor-luis-dornellez.jpg","email":"elpoetik@gmail.com","nationality":{"@type":"Country","name":"Uruguay"},"sameAs":["https://www.facebook.com/dorneelleez.luiis/","https://www.tiktok.com/@versosdelpensador"]},
+{"@type":"Book","name":"Un poco de amor propio","inLanguage":"es","bookFormat":"https://schema.org/Paperback","author":{"@id":"https://luisdornellez.github.io/#autor"},"image":"https://luisdornellez.github.io/portada-un-poco-de-amor-propio.jpg","url":"https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4","offers":{"@type":"Offer","price":"13.22","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4"}},
+{"@type":"Book","name":"Donde el corazón aprende a quedarse","inLanguage":"es","bookFormat":"https://schema.org/Paperback","author":{"@id":"https://luisdornellez.github.io/#autor"},"image":"https://luisdornellez.github.io/portada-donde-el-corazon-aprende-a-quedarse.jpg","url":"https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4","offers":{"@type":"Offer","price":"12.09","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4"}}
+]}
 </script>
 </head>
-
 <body>
-<a class="skip" href="#libros">Ir a los libros</a>
+<a class="skip" href="#contenido">Saltar al contenido</a>
 
-<header class="cabecera">
-  <div class="player" id="player">
-    <button id="botonMusica" type="button" aria-label="Reproducir música"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg><svg class="i-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
-    <div class="player-info">
-      <div class="player-cab"><div class="player-titulo">Música creada por mí</div><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></div>
-      <div class="barra" id="progreso" role="slider" tabindex="0" aria-label="Posición de la música" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <i id="progresoBarra"></i>
-      </div>
-      <div class="player-tiempo" id="tiempo">0:00</div>
-    </div>
-  </div>
-  <audio id="musica" src="M%C3%BAsica%20creada%20por%20mi.mp3" preload="metadata"></audio>
-
-  <h1>Luis Dornellez</h1>
-  <p class="lema">A veces, una palabra puede abrazar lo que el corazón no sabe decir.</p>
-  <img class="hero" src="Fondopag.png" width="1200" height="520" alt="Imagen principal de Luis Dornellez">
+<header class="nav-wrap">
+  <nav class="nav" aria-label="Principal">
+    <a class="brand" href="#inicio">Luis Dornellez</a>
+    <ul><li><a href="#libros">Libros</a></li><li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#redes">Redes</a></li></ul>
+    <a class="btn btn-sm" href="#contacto">Contacto</a>
+  </nav>
 </header>
 
-<main>
-  <section class="seccion" id="libros">
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Mis libros</h2>
+<div class="player" id="player">
+  <button id="botonMusica" type="button" aria-label="Reproducir música"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg><svg class="i-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+  <div class="p-info">
+    <div class="p-tit">Música creada por mí</div>
+    <div class="barra" id="progreso" role="slider" tabindex="0" aria-label="Posición de la música" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progresoBarra"></i></div>
+    <div class="p-tiempo" id="tiempo">0:00</div>
+  </div>
+</div>
+<audio id="musica" src="musica-creada-por-mi.mp3" preload="metadata"></audio>
+
+<main id="contenido">
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <p class="badge">Escritor y poeta de Uruguay</p>
+      <h1>Luis Dornellez</h1>
+      <p class="lema">A veces, una palabra puede abrazar lo que el corazón no sabe decir.</p>
+      <div class="cta"><a class="btn" href="#libros">Ver mis libros</a><a class="btn btn-ghost" href="#sobre-mi">Conocerme</a></div>
+      <figure class="hero-img" style="margin-bottom:0"><img src="hero.webp" width="1376" height="768" fetchpriority="high" alt="Libro de poemas abierto con la firma de Luis Dornellez, junto a una taza de café y una pluma, frente a una ventana"></figure>
+    </div>
+  </section>
+
+  <section class="sec" id="libros">
+    <div class="wrap">
+      <div class="cab"><h2>Mis libros</h2><p>Poesía para sanar, reflexionar y volver a encontrarte. Disponibles en papel en Lulu.</p></div>
       <div class="libros">
-
-        <article class="libro">
-          <img src="Unpocodeamor.jpg" width="1145" height="1374" loading="lazy" alt="Portada de Un poco de amor propio">
-          <div>
-            <h3>Un poco de amor propio</h3>
-            <p>Un libro de poesía para sanar, reflexionar y volver a encontrarte contigo mismo.</p>
-            <div class="precio">$13,22 USD</div>
-            <div class="acciones">
-              <a class="boton" href="https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&amp;pageSize=4" target="_blank" rel="noopener noreferrer">Comprar en Lulu</a>
-              <button class="boton boton-suave" type="button" aria-expanded="false" aria-controls="adelanto-amor" data-abrir="Leer un adelanto" data-cerrar="Cerrar adelanto">Leer un adelanto</button>
-            </div>
-          </div>
-          <div class="adelanto" id="adelanto-amor" hidden>
-            <p class="adelanto-texto">No mires atrás y deja esos miedos, es hora de avanzar y sanar. Eres fuerte con esas ganas de nunca rendirte, incluso con tantas piedras en el camino. Veo felicidad en ti, veo una persona increíble, solo mírate al espejo y visualiza todas las veces que pudiste levantarte. Eres lo más hermoso de esta vida, por favor, no te rindas.</p>
-            <p class="adelanto-pie">De «Un poco de amor propio», de Luis Dornellez</p>
-          </div>
+        <article class="card libro">
+          <div class="portada"><img src="portada-un-poco-de-amor-propio.jpg" width="309" height="470" loading="lazy" alt="Portada del libro Un poco de amor propio"></div>
+          <h3>Un poco de amor propio</h3>
+          <p>Un libro de poesía para sanar, reflexionar y volver a encontrarte contigo mismo.</p>
+          <span class="precio">$13,22 USD</span>
+          <div class="acciones"><a class="btn" href="https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&amp;pageSize=4" target="_blank" rel="noopener noreferrer">Comprar en Lulu</a></div>
+          <details class="adelanto"><summary class="btn btn-ghost">Leer un adelanto</summary>
+            <p class="adelanto-texto">No mires atrás y deja esos miedos, es hora de avanzar y sanar. Eres fuerte con esas ganas de nunca rendirte, incluso con tantas piedras en el camino. Veo felicidad en ti, veo una persona increíble, solo mírate al espejo y visualiza todas las veces que pudiste levantarte. Eres lo más hermoso de esta vida, por favor, no te rindas.<small>De «Un poco de amor propio», de Luis Dornellez</small></p>
+          </details>
         </article>
 
-        <article class="libro">
-          <img src="Dondeelcora.jpg" width="1009" height="800" loading="lazy" alt="Portada de Donde el corazón aprende a quedarse">
-          <div>
-            <h3>Donde el corazón aprende a quedarse</h3>
-            <p>Una historia de emociones, amor, heridas y esos lugares donde el corazón finalmente encuentra un hogar.</p>
-            <div class="precio">$12,09 USD</div>
-            <div class="acciones">
-              <a class="boton" href="https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&amp;pageSize=4" target="_blank" rel="noopener noreferrer">Comprar en Lulu</a>
-              <button class="boton boton-suave" type="button" aria-expanded="false" aria-controls="adelanto-corazon" data-abrir="Leer un adelanto" data-cerrar="Cerrar adelanto">Leer un adelanto</button>
-            </div>
-          </div>
-          <div class="adelanto" id="adelanto-corazon" hidden>
-            <p class="adelanto-texto adelanto-poema"><strong>A veces</strong><br><br>
-              A veces sonrío<br>porque no quiero explicar<br>todo lo que llevo dentro.<br>
-              A veces digo que estoy bien<br>porque ni yo mismo sé<br>cómo contar lo contrario.<br>
-              Y a veces solamente necesito<br>un poco de silencio,<br>una habitación tranquila<br>y la certeza<br>de que mañana será otro día.</p>
-            <p class="adelanto-pie" style="text-align:center">De «Donde el corazón aprende a quedarse», de Luis Dornellez</p>
-          </div>
+        <article class="card libro">
+          <div class="portada"><img src="portada-donde-el-corazon-aprende-a-quedarse.jpg" width="301" height="457" loading="lazy" alt="Portada del libro Donde el corazón aprende a quedarse"></div>
+          <h3>Donde el corazón aprende a quedarse</h3>
+          <p>Una historia de emociones, amor, heridas y esos lugares donde el corazón finalmente encuentra un hogar.</p>
+          <span class="precio">$12,09 USD</span>
+          <div class="acciones"><a class="btn" href="https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&amp;pageSize=4" target="_blank" rel="noopener noreferrer">Comprar en Lulu</a></div>
+          <details class="adelanto"><summary class="btn btn-ghost">Leer un adelanto</summary>
+            <p class="adelanto-texto"><strong>A veces</strong><br><br>A veces sonrío<br>porque no quiero explicar<br>todo lo que llevo dentro.<br>A veces digo que estoy bien<br>porque ni yo mismo sé<br>cómo contar lo contrario.<br>Y a veces solamente necesito<br>un poco de silencio,<br>una habitación tranquila<br>y la certeza<br>de que mañana será otro día.<small>De «Donde el corazón aprende a quedarse», de Luis Dornellez</small></p>
+          </details>
         </article>
-
       </div>
     </div>
   </section>
 
-  <section class="seccion sobre" id="sobre-mi">
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Sobre mí</h2>
-      <div class="autor">
-        <img class="foto-autor" src="autor-sombra.jpg" width="912" height="1236" loading="lazy" alt="Retrato en sombra de Luis Dornellez, escritor y poeta de Uruguay">
+  <section class="sec" id="sobre-mi" style="padding-top:0">
+    <div class="wrap">
+      <div class="card autor">
+        <img src="autor-luis-dornellez.jpg" width="912" height="1236" loading="lazy" alt="Retrato en sombra de Luis Dornellez, escritor y poeta de Uruguay">
         <div>
+          <h2>Sobre mí</h2>
           <p>Soy Luis Dornellez, escritor y poeta. Soy un chico de Uruguay y me gustan las cosas a la antigua, entre ellas la poesía.</p>
           <p>Escribir me hace bien. Escribo sobre amor propio, sanación, emociones y esperanza, y me gusta lograr que quien lea mis textos se sienta parte de la historia y pueda ver más allá de los problemas.</p>
           <p>Espero que mis palabras puedan acompañarte en algún momento de tu camino.</p>
@@ -283,119 +254,82 @@ footer{padding:48px 20px 40px}
     </div>
   </section>
 
-  <section class="seccion redes" id="redes">
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Mis redes</h2>
-      <ul class="lista-redes">
-        <li><a class="boton" href="https://www.facebook.com/dorneelleez.luiis/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><a class="boton" href="https://www.tiktok.com/@versosdelpensador" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+  <section class="sec" id="redes" style="padding-top:0">
+    <div class="wrap">
+      <div class="cab"><h2>Mis redes</h2><p>Versos, pensamientos y novedades.</p></div>
+      <ul class="redes">
+        <li><a class="card red" href="https://www.facebook.com/dorneelleez.luiis/" target="_blank" rel="noopener noreferrer"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></i><div>Facebook<span>dorneelleez.luiis</span></div></a></li>
+        <li><a class="card red" href="https://www.tiktok.com/@versosdelpensador" target="_blank" rel="noopener noreferrer"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg></i><div>TikTok<span>@versosdelpensador</span></div></a></li>
       </ul>
     </div>
   </section>
 
-  <section class="seccion contacto" id="contacto">
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Contacto</h2>
-      <p><a class="boton" href="mailto:elpoetik@gmail.com?subject=Hola%20Luis">Escribirme un correo</a></p>
-      <p class="correo-texto">elpoetik@gmail.com</p>
+  <section class="sec" id="contacto" style="padding-top:0">
+    <div class="wrap">
+      <div class="card contacto">
+        <h2>Escríbeme</h2>
+        <p>¿Quieres compartirme lo que sentiste al leer, o tienes una consulta? Me encantará leerte.</p>
+        <a class="btn" href="mailto:elpoetik@gmail.com?subject=Hola%20Luis">Escribirme un correo</a>
+        <p class="correo">elpoetik@gmail.com</p>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="pie">
-    <strong>Luis Dornellez</strong>
-    <nav aria-label="Enlaces del pie"><a href="#libros">Libros</a><a href="#sobre-mi">Sobre mí</a><a href="#redes">Redes</a><a href="#contacto">Contacto</a></nav>
-    <p>© 2026 Luis Dornellez. Todos los derechos reservados.</p>
+  <div class="wrap">
+    <div class="pie">
+      <div><strong>Luis Dornellez</strong><p>Escritor y poeta de Uruguay. Un mimo para tus alas.</p></div>
+      <nav aria-label="Enlaces del pie"><a href="#libros">Libros</a><a href="#sobre-mi">Sobre mí</a><a href="#redes">Redes</a><a href="#contacto">Contacto</a></nav>
+    </div>
+    <p class="copy">© 2026 Luis Dornellez. Todos los derechos reservados.</p>
   </div>
 </footer>
 
 <script>
 (() => {
-  const audio = document.getElementById('musica');
-  const player = document.getElementById('player');
-  const boton = document.getElementById('botonMusica');
-  const barra = document.getElementById('progreso');
-  const relleno = document.getElementById('progresoBarra');
-  const tiempo = document.getElementById('tiempo');
+  const audio = document.getElementById('musica'), player = document.getElementById('player'),
+        boton = document.getElementById('botonMusica'), barra = document.getElementById('progreso'),
+        relleno = document.getElementById('progresoBarra'), tiempo = document.getElementById('tiempo');
   if (!audio || !boton) return;
-
-  const fmt = s => Number.isFinite(s)
-    ? Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0')
-    : '0:00';
-
-  const setEstado = sonando => {
-    player.classList.toggle('sonando', sonando);
-    boton.setAttribute('aria-label', sonando ? 'Pausar música' : 'Reproducir música');
-  };
-
+  const fmt = s => Number.isFinite(s) ? Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0') : '0:00';
+  const estado = on => { player.classList.toggle('sonando', on); boton.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música'); };
   boton.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play().then(() => setEstado(true)).catch(() => setEstado(false));
-    } else {
-      audio.pause();
-      setEstado(false);
-    }
+    if (audio.paused) audio.play().then(() => estado(true)).catch(() => estado(false));
+    else { audio.pause(); estado(false); }
   });
-
-  audio.addEventListener('timeupdate', () => {
-    const d = audio.duration;
-    const t = audio.currentTime;
-    const p = d ? (t / d) * 100 : 0;
+  const pintar = () => {
+    const d = audio.duration, t = audio.currentTime, p = d ? (t / d) * 100 : 0;
     relleno.style.width = p + '%';
     barra.setAttribute('aria-valuenow', Math.round(p));
+    barra.setAttribute('aria-valuetext', fmt(t) + (d ? ' de ' + fmt(d) : ''));
     tiempo.textContent = fmt(t) + (d ? ' / ' + fmt(d) : '');
-  });
-
-  audio.addEventListener('ended', () => {
-    setEstado(false);
-    audio.currentTime = 0;
-  });
-
-  // Si el archivo de audio no existe o no carga, se oculta el reproductor
+  };
+  audio.addEventListener('timeupdate', pintar);
+  audio.addEventListener('loadedmetadata', pintar);
+  audio.addEventListener('ended', () => { estado(false); audio.currentTime = 0; });
   audio.addEventListener('error', () => { player.hidden = true; });
-
   barra.addEventListener('click', e => {
     if (!audio.duration) return;
     const r = barra.getBoundingClientRect();
-    const f = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
-    audio.currentTime = f * audio.duration;
+    audio.currentTime = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * audio.duration;
   });
-
   barra.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') audio.currentTime += 5;
-    if (e.key === 'ArrowLeft') audio.currentTime -= 5;
+    if (e.key === 'ArrowRight') { e.preventDefault(); audio.currentTime += 5; }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); audio.currentTime -= 5; }
   });
 })();
 
 (() => {
-  // Adelantos: cada botón abre y cierra el texto de su libro
-  document.querySelectorAll('button[aria-controls]').forEach(btn => {
-    const panel = document.getElementById(btn.getAttribute('aria-controls'));
-    if (!panel) return;
-    btn.addEventListener('click', () => {
-      const abierto = btn.getAttribute('aria-expanded') === 'true';
-      panel.hidden = abierto;
-      btn.setAttribute('aria-expanded', String(!abierto));
-      btn.textContent = abierto ? btn.dataset.abrir : btn.dataset.cerrar;
-    });
-  });
-})();
-
-(() => {
-  // Si una imagen no carga: se quita la principal o se muestra una portada con el título
+  // Si una imagen no carga: se quita la principal/autor o se muestra una portada con el título
   const fallar = img => {
-    if (img.classList.contains('hero') || img.classList.contains('foto-autor')) {
-      const autor = img.closest('.autor');
-      img.remove();
-      if (autor) autor.style.gridTemplateColumns = '1fr';
-      return;
-    }
+    const libro = img.closest('.libro');
+    if (!libro) { const f = img.closest('figure') || img; f.remove(); return; }
     const caja = document.createElement('div');
     caja.className = 'portada-vacia';
     caja.setAttribute('role', 'img');
     caja.setAttribute('aria-label', img.alt);
-    caja.textContent = img.closest('.libro').querySelector('h3').textContent;
+    caja.textContent = libro.querySelector('h3').textContent;
     img.replaceWith(caja);
   };
   document.querySelectorAll('img').forEach(img => {
