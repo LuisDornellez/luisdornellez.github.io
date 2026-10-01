@@ -168,6 +168,24 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* Libro digital */
+.digital{display:grid;grid-template-columns:minmax(0,260px) 1fr;gap:34px;align-items:center;margin-top:24px;padding:32px}
+.digital .portada{display:flex;justify-content:center;padding:22px;border-radius:20px;background:radial-gradient(70% 70% at 50% 40%,rgba(246,201,119,.16),rgba(255,255,255,.02))}
+.digital .portada img{width:min(100%,200px);border-radius:8px;box-shadow:0 26px 44px -14px #000,0 0 0 1px rgba(255,255,255,.08)}
+.digital-info{display:flex;flex-direction:column;gap:16px;align-items:flex-start;min-width:0}
+.digital h3{font-size:clamp(1.6rem,3vw,2rem)}
+.digital p,.digital li{color:var(--mu)}
+.etiqueta{color:var(--a1);font-weight:600;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase}
+.muestra{margin:0;padding:18px 22px;border-left:3px solid var(--a2);border-radius:0 16px 16px 0;background:rgba(255,255,255,.04);font:500 italic 1.25rem/1.55 var(--fd);color:var(--tx)}
+.muestra cite{display:block;margin-top:8px;font:400 .85rem var(--fb);font-style:normal;color:var(--mu)}
+#zona-compra{width:100%;max-width:380px}
+#zona-descarga{width:100%;padding:22px;border:1px solid var(--bd);border-radius:20px;background:rgba(246,201,119,.07)}
+.digital [hidden]{display:none!important}
+.digital h4{margin:0 0 14px;font:700 1.45rem var(--fd);color:var(--oro)}
+.digital ul{margin:8px 0 14px;padding-left:20px}
+.digital .nota{font-size:.9rem;margin-top:10px}
+@media (max-width:860px){.digital{grid-template-columns:1fr;padding:24px}.digital .portada{max-width:260px;margin:0 auto}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -212,7 +230,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 
   <section class="sec" id="libros">
     <div class="wrap">
-      <div class="cab"><h2>Mis libros</h2><p>Poesía para sanar, reflexionar y volver a encontrarte. Disponibles en papel en Lulu.</p></div>
+      <div class="cab"><h2>Mis libros</h2><p>Poesía para sanar, reflexionar y volver a encontrarte. Disponibles en papel en Lulu, y uno también en versión digital.</p></div>
       <div class="libros">
         <article class="card libro">
           <div class="portada"><img src="portada-un-poco-de-amor-propio.jpg" width="309" height="470" loading="lazy" alt="Portada del libro Un poco de amor propio"></div>
@@ -236,6 +254,33 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
           </details>
         </article>
       </div>
+
+        <article class="card digital" id="libro-digital">
+          <div class="portada"><img src="portada-donde-el-corazon-aprende-a-quedarse.jpg" width="301" height="457" loading="lazy" alt="Portada de la edición digital de Donde el corazón aprende a quedarse"></div>
+          <div class="digital-info">
+            <span class="etiqueta">Libro digital · EPUB</span>
+            <h3>Donde el corazón aprende a quedarse</h3>
+            <blockquote class="muestra">La noche sabe cosas<br>que el día nunca escucha.<cite>— De «La noche», en el libro</cite></blockquote>
+            <p>Es un libro digital: lo descargas apenas pagas y lo lees en tu celular, tablet o computadora, sin esperar envíos.</p>
+            <span class="precio">$8,00 USD</span>
+            <div id="zona-compra">
+              <div id="paypal-boton"></div>
+              <p class="nota" id="paypal-estado" role="status"></p>
+            </div>
+            <div id="zona-descarga" hidden>
+              <h4>¡Gracias por tu compra! 💛</h4>
+              <a class="btn" id="enlace-descarga" href="#" download>Descargar mi libro (EPUB)</a>
+              <p style="margin-top:18px"><strong>¿Con qué app lo leo en el celular?</strong></p>
+              <ul>
+                <li><strong>iPhone o iPad:</strong> abre el archivo con <strong>Libros</strong> (Apple Books), que ya viene en tu equipo.</li>
+                <li><strong>Android:</strong> instala <strong>Google Play Libros</strong> (gratis) y ábrelo con esa app. También sirven Lithium o Moon+ Reader.</li>
+                <li><strong>Computadora:</strong> Calibre o Thorium Reader, ambos gratis.</li>
+              </ul>
+              <p class="nota">Guarda el archivo: ya es tuyo. Si algo falla, escríbeme a elpoetik@gmail.com.</p>
+            </div>
+          </div>
+        </article>
+
     </div>
   </section>
 
@@ -336,6 +381,40 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
     if (img.complete && img.naturalWidth === 0) fallar(img);
     else img.addEventListener('error', () => fallar(img), { once: true });
   });
+})();
+</script>
+
+<script>
+(() => {
+  // === CONFIGURACIÓN DE PAYPAL: pega aquí tu Client ID (modo Live) ===
+  const CLIENT_ID = 'BAAbqjNv_5FvjiUI7rfEzQllz9zvUZ-aKn1nzFvR93hMeHR4uKUqD0k4kvH9YBer2kbEjt7ebxULqPHjnI';
+  const MONEDA = 'USD', PRECIO = '8.00';
+  const ARCHIVO = 'Donde_el_corazon_aprende_a_quedarse_Luis_Dornellez.epub';
+  const CLAVE = 'ld_compra_donde_el_corazon';
+  const compra = document.getElementById('zona-compra'), descarga = document.getElementById('zona-descarga'),
+        estado = document.getElementById('paypal-estado'), enlace = document.getElementById('enlace-descarga');
+  if (!compra) return;
+  const desbloquear = (scroll) => {
+    enlace.href = ARCHIVO; compra.hidden = true; descarga.hidden = false;
+    if (scroll) descarga.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+  try { if (localStorage.getItem(CLAVE)) { desbloquear(false); return; } } catch (e) {}
+  if (CLIENT_ID.startsWith('PEGA_')) { estado.textContent = 'El pago con PayPal estará disponible muy pronto.'; return; }
+  const s = document.createElement('script');
+  s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(CLIENT_ID) + '&currency=' + MONEDA + '&components=buttons';
+  s.onload = () => paypal.Buttons({
+    style: { layout: 'vertical', shape: 'pill', color: 'gold', label: 'pay' },
+    createOrder: (d, a) => a.order.create({ purchase_units: [{
+      description: 'Donde el corazón aprende a quedarse - libro digital (EPUB)',
+      amount: { currency_code: MONEDA, value: PRECIO } }] }),
+    onApprove: (d, a) => a.order.capture().then(det => {
+      if (det.status === 'COMPLETED') { try { localStorage.setItem(CLAVE, det.id); } catch (e) {} desbloquear(true); }
+      else estado.textContent = 'El pago no se completó. Si se te cobró, escríbeme a elpoetik@gmail.com.';
+    }),
+    onError: () => { estado.textContent = 'Hubo un problema con PayPal. Inténtalo otra vez o escríbeme a elpoetik@gmail.com.'; }
+  }).render('#paypal-boton');
+  s.onerror = () => { estado.textContent = 'No se pudo cargar PayPal. Revisa tu conexión e inténtalo de nuevo.'; };
+  document.head.appendChild(s);
 })();
 </script>
 </body>
