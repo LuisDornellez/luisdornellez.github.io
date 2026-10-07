@@ -179,6 +179,14 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 #zona-compra{width:100%;max-width:380px}
 #zona-descarga{width:100%;padding:22px;border:1px solid var(--bd);border-radius:20px;background:rgba(246,201,119,.07)}
 .digital [hidden]{display:none!important}
+.pago{width:100%;max-width:380px}
+.digital .pago-cab{display:flex;align-items:center;gap:8px;margin:0 0 14px;font:600 .95rem var(--fb);color:var(--oro)}
+.pago-cab svg{width:17px;height:17px;fill:currentColor;flex:none}
+#paypal-boton{min-height:52px}
+.digital .tarjetas{display:flex;justify-content:center;gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.digital .tarjetas li{display:block;margin:0}
+.tarjetas svg{display:block;width:46px;height:29px;border-radius:5px;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 6px 14px -6px #000}
+.digital .pago .nota{text-align:center}
 .digital h4{margin:0 0 14px;font:700 1.45rem var(--fd);color:var(--oro)}
 .digital ul{margin:8px 0 14px;padding-left:20px}
 .digital .nota{font-size:.9rem;margin-top:10px}
@@ -261,8 +269,16 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
             <p>Es un libro digital: lo descargas apenas pagas y lo lees en tu celular, tablet o computadora, sin esperar envíos.</p>
             <span class="precio">$6,00 USD</span>
             <div id="zona-compra">
-              <div id="paypal-boton"></div>
-              <p class="nota" id="paypal-estado" role="status"></p>
+              <div class="pago">
+                <p class="pago-cab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7zm3 6a1.5 1.5 0 0 1 .75 2.8V18h-1.5v-2.2A1.5 1.5 0 0 1 12 13z"/></svg><span id="pago-titulo">Pago seguro con tarjeta</span></p>
+                <div id="paypal-boton"></div>
+                <ul class="tarjetas" id="tarjetas" aria-label="Tarjetas aceptadas">
+                  <li><svg viewBox="0 0 48 30" role="img" aria-label="Visa"><title>Visa</title><rect width="48" height="30" rx="5" fill="#fff"/><text x="24" y="20.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="15" letter-spacing="-.5" fill="#1a1f71">VISA</text></svg></li>
+                  <li><svg viewBox="0 0 48 30" role="img" aria-label="Mastercard"><title>Mastercard</title><defs><clipPath id="mc-recorte"><circle cx="19" cy="15" r="9"/></clipPath></defs><rect width="48" height="30" rx="5" fill="#fff"/><circle cx="19" cy="15" r="9" fill="#eb001b"/><circle cx="29" cy="15" r="9" fill="#f79e1b"/><circle cx="29" cy="15" r="9" fill="#ff5f00" clip-path="url(#mc-recorte)"/></svg></li>
+                  <li><svg viewBox="0 0 48 30" role="img" aria-label="American Express"><title>American Express</title><rect width="48" height="30" rx="5" fill="#006fcf"/><text x="24" y="19.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="11.5" letter-spacing=".6" fill="#fff">AMEX</text></svg></li>
+                </ul>
+                <p class="nota" id="paypal-estado" role="status"></p>
+              </div>
             </div>
             <div id="zona-descarga" hidden>
               <h4>¡Gracias por tu compra! 💛</h4>
@@ -273,7 +289,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
                 <li><strong>Android:</strong> instala <strong>Google Play Libros</strong> (gratis) y ábrelo con esa app. También sirven Lithium o Moon+ Reader.</li>
                 <li><strong>Computadora:</strong> Calibre o Thorium Reader, ambos gratis.</li>
               </ul>
-              <p class="nota">Guarda el archivo: ya es tuyo. Si algo falla, escríbeme a elpoetik@gmail.com.</p>
+              <p class="nota">Guarda el archivo: ya es tuyo. Si tienes cualquier duda o consulta, o si algo falla, escríbeme a <a href="mailto:elpoetik@gmail.com?subject=Consulta%20sobre%20mi%20libro" style="color:var(--oro);text-decoration:underline">elpoetik@gmail.com</a> y con gusto te ayudo.</p>
             </div>
           </div>
         </article>
@@ -397,18 +413,29 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
   try { if (localStorage.getItem(CLAVE)) { desbloquear(false); return; } } catch (e) {}
   if (CLIENT_ID.startsWith('PEGA_')) { estado.textContent = 'El pago con PayPal estará disponible muy pronto.'; return; }
   const s = document.createElement('script');
-  s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(CLIENT_ID) + '&currency=' + MONEDA + '&components=buttons';
-  s.onload = () => paypal.Buttons({
-    style: { layout: 'vertical', shape: 'pill', color: 'gold', label: 'pay' },
-    createOrder: (d, a) => a.order.create({ application_context: { shipping_preference: 'NO_SHIPPING' }, purchase_units: [{
-      description: 'Donde el corazón aprende a quedarse - libro digital (EPUB)',
-      amount: { currency_code: MONEDA, value: PRECIO } }] }),
-    onApprove: (d, a) => a.order.capture().then(det => {
-      if (det.status === 'COMPLETED') { try { localStorage.setItem(CLAVE, det.id); } catch (e) {} desbloquear(true); }
-      else estado.textContent = 'El pago no se completó. Si se te cobró, escríbeme a elpoetik@gmail.com.';
-    }),
-    onError: () => { estado.textContent = 'Hubo un problema con PayPal. Inténtalo otra vez o escríbeme a elpoetik@gmail.com.'; }
-  }).render('#paypal-boton');
+  s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(CLIENT_ID) + '&currency=' + MONEDA + '&components=buttons&enable-funding=card';
+  s.onload = () => {
+    const comunes = {
+      createOrder: (d, a) => a.order.create({ application_context: { shipping_preference: 'NO_SHIPPING' }, purchase_units: [{
+        description: 'Donde el corazón aprende a quedarse - libro digital (EPUB)',
+        amount: { currency_code: MONEDA, value: PRECIO } }] }),
+      onApprove: (d, a) => a.order.capture().then(det => {
+        if (det.status === 'COMPLETED') { try { localStorage.setItem(CLAVE, det.id); } catch (e) {} desbloquear(true); }
+        else estado.textContent = 'El pago no se completó. Si se te cobró, escríbeme a elpoetik@gmail.com.';
+      }),
+      onError: () => { estado.textContent = 'Hubo un problema con el pago. Inténtalo otra vez o escríbeme a elpoetik@gmail.com.'; }
+    };
+    // Solo el botón de tarjeta (sin el botón amarillo de PayPal)
+    const tarjeta = paypal.Buttons(Object.assign({
+      fundingSource: paypal.FUNDING.CARD,
+      style: { layout: 'vertical', shape: 'pill', color: 'white', height: 52, label: 'pay' }
+    }, comunes));
+    if (tarjeta.isEligible()) { tarjeta.render('#paypal-boton'); return; }
+    // Respaldo: si PayPal no habilita la tarjeta en este dispositivo/país, se muestra el botón normal para no perder la venta
+    document.getElementById('tarjetas').hidden = true;
+    document.getElementById('pago-titulo').textContent = 'Pago seguro con PayPal';
+    paypal.Buttons(Object.assign({ style: { layout: 'vertical', shape: 'pill', color: 'gold', label: 'pay' } }, comunes)).render('#paypal-boton');
+  };
   s.onerror = () => { estado.textContent = 'No se pudo cargar PayPal. Revisa tu conexión e inténtalo de nuevo.'; };
   document.head.appendChild(s);
 })();
