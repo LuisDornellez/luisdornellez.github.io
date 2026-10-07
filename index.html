@@ -101,11 +101,10 @@ a{color:var(--a1)}
 .adelanto-texto small{display:block;margin-top:12px;font:600 .88rem var(--fb);font-style:normal;color:var(--a1)}
 
 /* Sobre mí */
-.autor{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:48px;align-items:center;padding:28px}
-.autor img{width:100%;border-radius:22px;aspect-ratio:912/1236;object-fit:cover;box-shadow:0 0 0 1px var(--bd),0 30px 70px -24px rgba(228,135,74,.4)}
+.autor{display:block;text-align:center;padding:40px 28px}
 .autor h2{font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:22px}
 .autor p+p{margin-top:14px}
-.autor p{color:var(--mu);max-width:54ch}
+.autor p{color:var(--mu);max-width:54ch;margin-left:auto;margin-right:auto}
 .autor .cita{margin-top:26px;font:700 italic clamp(1.6rem,3.5vw,2.1rem)/1.2 var(--fd);color:var(--oro)}
 
 /* Redes */
@@ -149,10 +148,8 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 .p-tiempo{font-size:11.5px;line-height:1;color:var(--mu);font-variant-numeric:tabular-nums}
 
 @media (max-width:860px){
-  .libros,.autor{grid-template-columns:1fr}
-  .autor{gap:30px;text-align:center}
-  .autor img{max-width:280px;margin:0 auto}
-  .autor p{margin-left:auto;margin-right:auto}
+  .libros{grid-template-columns:1fr}
+  .autor{padding:32px 22px}
 }
 @media (max-width:640px){
   .nav ul{display:none}
@@ -190,7 +187,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://luisdornellez.github.io/#web","url":"https://luisdornellez.github.io/","name":"Luis Dornellez","inLanguage":"es","publisher":{"@id":"https://luisdornellez.github.io/#autor"}},
-{"@type":"Person","@id":"https://luisdornellez.github.io/#autor","name":"Luis Dornellez","jobTitle":"Escritor y poeta","url":"https://luisdornellez.github.io/","image":"https://luisdornellez.github.io/autor-luis-dornellez.jpg","email":"elpoetik@gmail.com","nationality":{"@type":"Country","name":"Uruguay"},"sameAs":["https://www.facebook.com/dorneelleez.luiis/","https://www.tiktok.com/@versosdelpensador"]},
+{"@type":"Person","@id":"https://luisdornellez.github.io/#autor","name":"Luis Dornellez","jobTitle":"Escritor y poeta","url":"https://luisdornellez.github.io/","email":"elpoetik@gmail.com","nationality":{"@type":"Country","name":"Uruguay"},"sameAs":["https://www.facebook.com/dorneelleez.luiis/","https://www.tiktok.com/@versosdelpensador"]},
 {"@type":"Book","name":"Un poco de amor propio","inLanguage":"es","bookFormat":"https://schema.org/Paperback","author":{"@id":"https://luisdornellez.github.io/#autor"},"image":"https://luisdornellez.github.io/portada-un-poco-de-amor-propio.jpg","url":"https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4","offers":{"@type":"Offer","price":"13.22","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4"}},
 {"@type":"Book","name":"Donde el corazón aprende a quedarse","inLanguage":"es","bookFormat":"https://schema.org/Paperback","author":{"@id":"https://luisdornellez.github.io/#autor"},"image":"https://luisdornellez.github.io/portada-donde-el-corazon-aprende-a-quedarse.jpg","url":"https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4","offers":{"@type":"Offer","price":"12.09","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4"}}
 ]}
@@ -287,7 +284,6 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
   <section class="sec" id="sobre-mi" style="padding-top:0">
     <div class="wrap">
       <div class="card autor">
-        <img src="autor-luis-dornellez.jpg" width="912" height="1236" loading="lazy" alt="Retrato en sombra de Luis Dornellez, escritor y poeta de Uruguay">
         <div>
           <h2>Sobre mí</h2>
           <p>Soy Luis Dornellez, escritor y poeta. Soy un chico de Uruguay y me gustan las cosas a la antigua, entre ellas la poesía.</p>
