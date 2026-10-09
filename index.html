@@ -130,6 +130,9 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 .pie nav a{color:var(--mu);text-decoration:none}
 .pie nav a:hover{color:var(--a1)}
 .copy{margin-top:36px;padding-top:24px;border-top:1px solid var(--bd);color:var(--mu);font-size:.88rem}
+.servicios{margin-top:12px;color:var(--mu);font-size:.88rem}
+.servicios a{color:var(--a1);font-weight:600;text-decoration:none}
+.servicios a:hover{text-decoration:underline}
 
 /* Reproductor flotante */
 .player{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:12px;width:282px;padding:8px 20px 8px 8px;background:rgba(27,21,17,.78);border:1px solid var(--bd);border-radius:999px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 18px 44px -14px #000}
@@ -191,6 +194,12 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 .digital ul{margin:8px 0 14px;padding-left:20px}
 .digital .nota{font-size:.9rem;margin-top:10px}
 @media (max-width:860px){.digital{grid-template-columns:1fr;padding:24px}.digital .portada{max-width:260px;margin:0 auto}}
+
+/* Fondo animado ligado al scroll (canvas fijo detrás de todo) */
+#fondo-scroll{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:-1;display:block;pointer-events:none;user-select:none;-webkit-user-select:none}
+#fondo-cine{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 52%,rgba(5,3,2,.6) 100%),linear-gradient(180deg,rgba(0,0,0,.38),transparent 20%,transparent 80%,rgba(0,0,0,.42))}
+#fondo-cine::after{content:"";position:absolute;inset:-50%;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .92 0 0 0 0 .8 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grano .9s steps(6) infinite}
+@keyframes grano{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-5%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -202,6 +211,8 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 </script>
 </head>
 <body>
+<canvas id="fondo-scroll" aria-hidden="true"></canvas>
+<div id="fondo-cine" aria-hidden="true"></div>
 <a class="skip" href="#contenido">Saltar al contenido</a>
 
 <header class="nav-wrap">
@@ -282,6 +293,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
             </div>
             <div id="zona-descarga" hidden>
               <h4>¡Gracias por tu compra! 💛</h4>
+              <p id="cuenta" role="timer" style="font-weight:600;color:var(--a1);margin:8px 0 14px"></p>
               <a class="btn" id="enlace-descarga" href="#" download>Descargar mi libro (EPUB)</a>
               <p style="margin-top:18px"><strong>¿Con qué app lo leo en el celular?</strong></p>
               <ul>
@@ -340,6 +352,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
       <nav aria-label="Enlaces del pie"><a href="#libros">Libros</a><a href="#sobre-mi">Sobre mí</a><a href="#redes">Redes</a><a href="#contacto">Contacto</a></nav>
     </div>
     <p class="copy">© 2026 Luis Dornellez. Todos los derechos reservados.</p>
+    <p class="servicios">¿Necesitas una página web? Soy programador web y creo páginas web a medida. <a href="https://luisdornellez.com" target="_blank" rel="noopener">Mira mis servicios en luisdornellez.com</a></p>
   </div>
 </footer>
 
@@ -406,8 +419,24 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
   const compra = document.getElementById('zona-compra'), descarga = document.getElementById('zona-descarga'),
         estado = document.getElementById('paypal-estado'), enlace = document.getElementById('enlace-descarga');
   if (!compra) return;
+  const MINUTOS = 30, CLAVE_FIN = CLAVE + '_hasta';      // minutos que dura la descarga tras pagar
+  const cuenta = document.getElementById('cuenta');
+  let fin = 0, reloj = 0;
+  const formato = ms => { const t = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+  const tic = () => {
+    const resto = fin - Date.now();
+    if (resto <= 0) {
+      clearInterval(reloj); enlace.hidden = true; enlace.removeAttribute('href');
+      cuenta.textContent = 'Se acabó el tiempo de descarga. Escríbeme a elpoetik@gmail.com y te ayudo.';
+      return;
+    }
+    cuenta.textContent = 'Tiempo para descargar: ' + formato(resto);
+  };
   const desbloquear = (scroll) => {
+    try { fin = Number(localStorage.getItem(CLAVE_FIN)) || 0; } catch (e) {}
+    if (!fin) { fin = Date.now() + MINUTOS * 60000; try { localStorage.setItem(CLAVE_FIN, String(fin)); } catch (e) {} }
     enlace.href = ARCHIVO; compra.hidden = true; descarga.hidden = false;
+    tic(); if (fin > Date.now()) reloj = setInterval(tic, 1000);
     if (scroll) descarga.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
   try { if (localStorage.getItem(CLAVE)) { desbloquear(false); return; } } catch (e) {}
@@ -420,7 +449,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
         description: 'Donde el corazón aprende a quedarse - libro digital (EPUB)',
         amount: { currency_code: MONEDA, value: PRECIO } }] }),
       onApprove: (d, a) => a.order.capture().then(det => {
-        if (det.status === 'COMPLETED') { try { localStorage.setItem(CLAVE, det.id); } catch (e) {} desbloquear(true); }
+        if (det.status === 'COMPLETED') { try { localStorage.setItem(CLAVE, det.id); localStorage.removeItem(CLAVE_FIN); } catch (e) {} desbloquear(true); }
         else estado.textContent = 'El pago no se completó. Si se te cobró, escríbeme a elpoetik@gmail.com.';
       }),
       onError: () => { estado.textContent = 'Hubo un problema con el pago. Inténtalo otra vez o escríbeme a elpoetik@gmail.com.'; }
@@ -438,6 +467,381 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
   };
   s.onerror = () => { estado.textContent = 'No se pudo cargar PayPal. Revisa tu conexión e inténtalo de nuevo.'; };
   document.head.appendChild(s);
+})();
+</script>
+<script>
+/* ===== Cielo estrellado ligado al scroll =====
+   Al bajar la página el cielo avanza; al subir retrocede (todo depende de scrollY).
+   Capas: degradado por sección · niebla · estrellas lejanas · constelaciones · luciérnagas, plumas y polvo.
+   Para ajustar, cambia los valores de CFG. */
+(() => {
+  const canvas = document.getElementById('fondo-scroll');
+  if (!canvas || !canvas.getContext) return;
+  const ctx = canvas.getContext('2d');
+
+  const CFG = {
+    particulasEscritorio: 90,   // luciérnagas, plumas y polvo en pantallas grandes
+    particulasMovil: 40,        // lo mismo en celulares
+    estrellasEscritorio: 130,   // estrellas del cielo en pantallas grandes
+    estrellasMovil: 65,         // estrellas del cielo en celulares
+    constelaciones: 1.15,       // 0 = sin constelaciones · 1 = normal · 1.5 = líneas más visibles
+    destello: 1,                // destello al terminar de dibujarse una constelación (0 = sin destello)
+    estrellasFugaces: 1,        // 0 = sin estrellas fugaces · 1 = normal · 2 = más frecuentes
+    umbralFugaz: 1400,          // velocidad de scroll (px/s) a partir de la cual pueden aparecer
+    velocidad: 1,               // 0.5 = más lento · 1 = normal · 2 = más rápido
+    suavidad: 6,                // más alto = el fondo sigue al scroll más rápido
+    brillo: 1,                  // 0.5 = más tenue · 1.5 = más intenso
+    niebla: 1,                  // 0 = sin niebla
+    colores: ['246,201,119', '234,208,167', '228,135,74'],   // dorado, oro claro, naranja (RGB)
+    base: '#120e0b'
+  };
+
+  // Tono del degradado por sección: [brillo A, brillo B] en RGB
+  const TONOS = {
+    'inicio':   [[246,201,119], [228,135,74]],
+    'libros':   [[228,135,74],  [234,208,167]],
+    'sobre-mi': [[234,208,167], [196,98,62]],
+    'redes':    [[246,201,119], [196,98,62]],
+    'contacto': [[228,135,74],  [246,201,119]]
+  };
+
+  // Constelaciones: puntos (x, y entre -1 y 1) y las líneas que los unen
+  const CONS = [
+    { n: 'Cruz del Sur', p: [[0,-1],[0,1],[-.55,.1],[.6,-.1],[.3,.45]], e: [[0,1],[2,3]] },
+    { n: 'Osa Mayor',    p: [[-1,-.35],[-.62,-.2],[-.28,-.1],[.1,-.05],[.18,.4],[.65,.5],[.7,0]], e: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,3]] },
+    { n: 'Casiopea',     p: [[-1,-.3],[-.5,.35],[0,-.15],[.5,.4],[1,-.35]], e: [[0,1],[1,2],[2,3],[3,4]] },
+    { n: 'Orión',        p: [[-.5,-.9],[.5,-.85],[-.22,-.05],[0,0],[.22,.05],[-.5,.95],[.55,.9]], e: [[0,2],[1,4],[2,3],[3,4],[2,5],[4,6],[0,1]] },
+    { n: 'Escorpio',     p: [[-1,-.6],[-.7,-.3],[-.35,-.1],[0,.1],[.3,.4],[.45,.8],[.9,.9],[1,.5]], e: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]] }
+  ];
+
+  const mqMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let W = 0, H = 0, dpr = 1, movil = null, parts = [], niebla = [], cielo = [], consts = [], glow = [], keys = [];
+  let sy = window.scrollY || 0, raf = 0, last = 0, wind = 0, reducido = mqMovimiento.matches;
+  let prevY = window.scrollY || 0, velS = 0, proxFugaz = 0, fugaces = [];
+  const M = 80;                       // margen fuera de pantalla para reciclar elementos
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const mod = (n, m) => ((n % m) + m) % m;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const suave = t => t * t * (3 - 2 * t);
+
+  // Resplandores pre-dibujados (más rápido que shadowBlur)
+  function crearSprites() {
+    glow = CFG.colores.map(c => {
+      const s = document.createElement('canvas'); s.width = s.height = 64;
+      const g = s.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      r.addColorStop(0, 'rgba(' + c + ',1)'); r.addColorStop(.22, 'rgba(' + c + ',.45)'); r.addColorStop(1, 'rgba(' + c + ',0)');
+      g.fillStyle = r; g.fillRect(0, 0, 64, 64);
+      return s;
+    });
+  }
+
+  function crearParticulas() {
+    const n = movil ? CFG.particulasMovil : CFG.particulasEscritorio;
+    parts = [];
+    for (let i = 0; i < n; i++) {
+      const q = Math.random();
+      const tipo = q < .12 ? 'pluma' : q < .60 ? 'luz' : 'polvo';
+      const prof = tipo === 'pluma' ? rnd(.55, .9) : tipo === 'polvo' ? rnd(1, 1.5) : rnd(.35, 1);
+      parts.push({
+        tipo, prof,
+        bx: Math.random(), by: Math.random(),
+        tam: tipo === 'pluma' ? rnd(9, 20) * (.6 + prof * .6) : tipo === 'polvo' ? rnd(.6, 1.4) : rnd(6, 16) * (.5 + prof * .7),
+        fase: rnd(0, 6.283), ritmo: rnd(.6, 1.8), vaiven: rnd(.5, 1.5), amp: rnd(14, 46),
+        c: Math.floor(Math.random() * CFG.colores.length),
+        a: tipo === 'pluma' ? rnd(.12, .26) : tipo === 'polvo' ? rnd(.25, .6) : rnd(.28, .6),
+        giro: Math.random() < .5 ? -1 : 1
+      });
+    }
+    parts.sort((a, b) => a.prof - b.prof);   // lo lejano se dibuja primero
+
+    niebla = [];
+    const nf = movil ? 2 : 3;
+    for (let i = 0; i < nf; i++) niebla.push({ bx: Math.random(), by: rnd(.2, .9), r: rnd(.45, .8), k: rnd(.06, .16) * (i % 2 ? -1 : 1), fase: rnd(0, 6.283), c: i % 2, a: rnd(.05, .085) });
+
+    cielo = [];
+    const ne = movil ? CFG.estrellasMovil : CFG.estrellasEscritorio;
+    for (let i = 0; i < ne; i++) {
+      const grande = Math.random() < .12;
+      cielo.push({ bx: Math.random(), by: Math.random(), prof: rnd(.12, .38), tam: grande ? rnd(1.3, 2) : rnd(.4, 1.2),
+        fase: rnd(0, 6.283), ritmo: rnd(.5, 2.2), a: grande ? rnd(.6, .95) : rnd(.25, .75), c: Math.random() < .7 ? 1 : 0, grande });
+    }
+
+    consts = [];
+    const nc = movil ? 3 : CONS.length;
+    for (let i = 0; i < nc; i++) {
+      consts.push({ d: CONS[i], bx: i % 2 ? rnd(.6, .82) : rnd(.15, .38), by: (i + .5) / nc + rnd(-.04, .04),
+        k: rnd(.9, 1.15), rot: rnd(-.3, .3), prof: rnd(.24, .3), listo: false, flashT: -99 });
+    }
+  }
+
+  function medirSecciones() {
+    const y0 = window.scrollY || 0;
+    keys = Object.keys(TONOS).map(id => {
+      const el = document.getElementById(id);
+      return el ? { top: el.getBoundingClientRect().top + y0, t: TONOS[id] } : null;
+    }).filter(Boolean);
+  }
+
+  function tonoEn(y) {
+    if (!keys.length) return TONOS.inicio;
+    if (y <= keys[0].top) return keys[0].t;
+    for (let i = 0; i < keys.length - 1; i++) {
+      const a = keys[i], b = keys[i + 1];
+      if (y < b.top) {
+        const t = suave((y - a.top) / Math.max(1, b.top - a.top));
+        return [0, 1].map(k => a.t[k].map((v, j) => lerp(v, b.t[k][j], t)));
+      }
+    }
+    return keys[keys.length - 1].t;
+  }
+
+  function medir() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w || !h) return;
+    const nuevoMovil = w < 768;
+    if (w === W && h === H) return;
+    W = w; H = h;
+    dpr = Math.min(window.devicePixelRatio || 1, nuevoMovil ? 1.5 : 2);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (nuevoMovil !== movil) { movil = nuevoMovil; crearParticulas(); }
+    medirSecciones();
+    if (reducido) dibujar(0, true);
+  }
+
+  // Constelaciones: aparecen y se van dibujando al acercarse al centro de la pantalla.
+  // Cuando el trazo se completa, lanzan un pequeño destello (estrella por estrella).
+  function dibujarConstelaciones(t, y, b, v, estatico, F) {
+    const Fc = F * 2.2, s0 = Math.max(70, Math.min(W, H) * .2) * (movil ? 1.1 : 1);
+    const DF = estatico ? 0 : CFG.destello;
+    for (const c of consts) {
+      const s = s0 * c.k, d = c.d;
+      const cy = mod(c.by * Fc - y * c.prof * .42 * v, Fc) - M;
+      if (cy < -s * 1.4 || cy > H + s * 1.4) { c.listo = false; continue; }
+      const cx = c.bx * W;
+      const r = suave(clamp(1 - Math.abs(cy - H * .5) / (H * .62), 0, 1));
+      if (r < .01) { c.listo = false; continue; }
+      const E = d.e.length;
+      const trazoCompleto = r * E * 1.25 - (E - 1) >= 1;       // la última línea ya llegó a su punto final
+      if (trazoCompleto && !c.listo) { c.listo = true; c.flashT = t; }
+      else if (r < .55) c.listo = false;                        // al alejarse se "rearma" para volver a destellar
+      const dt0 = t - c.flashT;
+      const fl = DF > 0 && dt0 >= 0 && dt0 < 1.6 ? 1 - dt0 / 1.6 : 0;   // intensidad global del destello (1 → 0)
+      const co = Math.cos(c.rot), si = Math.sin(c.rot);
+      const pts = d.p.map(q => [cx + (q[0] * co - q[1] * si) * s, cy + (q[0] * si + q[1] * co) * s]);
+      // líneas (se trazan de a poco según r): halo suave + trazo nítido
+      if (CFG.constelaciones > 0) {
+        const trazar = () => {
+          ctx.beginPath();
+          d.e.forEach((e, i) => {
+            const f = clamp(r * E * 1.25 - i, 0, 1);
+            if (f <= 0) return;
+            const a = pts[e[0]], z = pts[e[1]];
+            ctx.moveTo(a[0], a[1]); ctx.lineTo(lerp(a[0], z[0], f), lerp(a[1], z[1], f));
+          });
+          ctx.stroke();
+        };
+        ctx.lineCap = 'round'; ctx.strokeStyle = 'rgb(' + CFG.colores[1] + ')';
+        ctx.globalAlpha = Math.min(1, (.1 * r + .2 * fl * DF) * b * CFG.constelaciones);
+        ctx.lineWidth = 3.4 + 3 * fl * DF; trazar();
+        ctx.globalAlpha = Math.min(1, (.55 * r + .45 * fl * DF) * b * CFG.constelaciones);
+        ctx.lineWidth = 1.15 + .9 * fl * DF; trazar();
+        ctx.lineCap = 'butt';
+      }
+      // estrellas de la constelación
+      pts.forEach((pt, i) => {
+        const tw = estatico ? 1 : .75 + .25 * Math.sin(t * 1.3 + i * 1.7 + c.rot * 9);
+        const brillante = i < 2;
+        const fi = DF > 0 ? clamp(1 - (dt0 - i * .07) / .9, 0, 1) * (dt0 >= i * .07 ? 1 : 0) : 0;   // destello escalonado
+        const rad = (brillante ? 2.3 : 1.6) * (1 + .7 * fi * DF);
+        ctx.globalAlpha = Math.min(1, (.5 + .5 * r) * tw * b * .7);
+        ctx.drawImage(glow[1], pt[0] - rad * 6, pt[1] - rad * 6, rad * 12, rad * 12);
+        if (fi > 0) {
+          const g = rad * (7 + 9 * (1 - fi));
+          ctx.globalAlpha = Math.min(1, fi * .85 * b);
+          ctx.drawImage(glow[1], pt[0] - g, pt[1] - g, g * 2, g * 2);
+        }
+        ctx.globalAlpha = Math.min(1, (.6 + .4 * r) * tw * b);
+        ctx.fillStyle = 'rgb(255,243,220)';
+        ctx.beginPath(); ctx.arc(pt[0], pt[1], rad, 0, 6.283); ctx.fill();
+        if (brillante || fi > .05) {
+          ctx.strokeStyle = 'rgb(255,243,220)'; ctx.lineWidth = .8;
+          const l = (brillante ? 8 : 5) * tw * (1 + 1.6 * fi * DF);
+          ctx.beginPath(); ctx.moveTo(pt[0] - l, pt[1]); ctx.lineTo(pt[0] + l, pt[1]); ctx.moveTo(pt[0], pt[1] - l); ctx.lineTo(pt[0], pt[1] + l); ctx.stroke();
+        }
+      });
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Estrellas fugaces: aparecen de vez en cuando si el scroll es rápido
+  function lanzarFugaz() {
+    const izq = Math.random() < .5, ang = rnd(.38, .62);
+    const dir = izq ? ang : Math.PI - ang;
+    fugaces.push({
+      x0: rnd(.08, .92) * W, y0: rnd(.02, .4) * H,
+      dx: Math.cos(dir), dy: Math.sin(dir),
+      dist: Math.max(300, rnd(.4, .7) * W), len: rnd(120, 200) * (movil ? .8 : 1),
+      dur: rnd(.7, 1.1), age: 0
+    });
+  }
+  function actualizarFugaces(dt, t) {
+    if (CFG.estrellasFugaces <= 0) { fugaces.length = 0; return; }
+    if (velS > CFG.umbralFugaz && t >= proxFugaz && fugaces.length < 2 && Math.random() < .06) {
+      lanzarFugaz();
+      proxFugaz = t + rnd(2.5, 5.5) / CFG.estrellasFugaces;
+    }
+    for (const m of fugaces) m.age += dt;
+    fugaces = fugaces.filter(m => m.age < m.dur);
+  }
+  function dibujarFugaces(b) {
+    for (const m of fugaces) {
+      const p = m.age / m.dur, e = 1 - Math.pow(1 - p, 1.6);      // arranca rápida y frena un poco
+      const hx = m.x0 + m.dx * m.dist * e, hy = m.y0 + m.dy * m.dist * e;
+      const tx = hx - m.dx * m.len, ty = hy - m.dy * m.len;
+      const al = Math.min(1, p * 7) * Math.min(1, (1 - p) * 3) * b;
+      const g = ctx.createLinearGradient(tx, ty, hx, hy);
+      g.addColorStop(0, 'rgba(' + CFG.colores[0] + ',0)');
+      g.addColorStop(.65, 'rgba(' + CFG.colores[1] + ',.35)');
+      g.addColorStop(1, 'rgba(255,248,230,1)');
+      ctx.globalAlpha = al; ctx.strokeStyle = g; ctx.lineWidth = 1.7; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(hx, hy); ctx.stroke();
+      ctx.lineCap = 'butt';
+      ctx.globalAlpha = al * .9; ctx.drawImage(glow[1], hx - 12, hy - 12, 24, 24);
+      ctx.globalAlpha = al; ctx.fillStyle = 'rgb(255,248,230)';
+      ctx.beginPath(); ctx.arc(hx, hy, 1.5, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function dibujar(t, estatico) {
+    const y = estatico ? 0 : sy;
+    const doc = document.documentElement;
+    const total = Math.max(1, doc.scrollHeight - window.innerHeight);
+    const p = estatico ? 0 : Math.min(1, Math.max(0, y / total));
+    const b = CFG.brillo;
+    const F = H + M * 2, FW = W + M * 2, v = CFG.velocidad;
+
+    // 1) Base y degradado que cambia de tono según la sección
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = CFG.base; ctx.fillRect(0, 0, W, H);
+    const tono = tonoEn(y + H * .35), R = Math.max(W, H) * .75;
+    const focos = [
+      [W * (.12 + .7 * p), H * (.22 + .18 * Math.sin(p * 9)), tono[0], .17],
+      [W * (.88 - .7 * p), H * (.78 - .2 * Math.cos(p * 7)), tono[1], .15]
+    ];
+    for (const [cx, cy, c, al] of focos) {
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+      const rgb = c.map(Math.round).join(',');
+      g.addColorStop(0, 'rgba(' + rgb + ',' + (al * b).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+
+    // 2) Niebla que se desliza de lado con el scroll
+    if (CFG.niebla > 0) for (const f of niebla) {
+      const r = f.r * Math.max(W, H) * .6, span = W + r * 2;
+      const x = mod(f.bx * span - y * f.k - (estatico ? 0 : t * 6 * Math.sign(f.k)), span) - r;
+      const yy = f.by * H + (estatico ? 0 : Math.sin(t * .2 + f.fase) * 24);
+      const rgb = tono[f.c].map(Math.round).join(',');
+      const g = ctx.createRadialGradient(x, yy, 0, x, yy, r);
+      g.addColorStop(0, 'rgba(' + rgb + ',' + (f.a * b * CFG.niebla).toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = g; ctx.fillRect(x - r, yy - r, r * 2, r * 2);
+    }
+
+    // 3) Estrellas del cielo (lejanas, parallax lento)
+    for (const e of cielo) {
+      const py = mod(e.by * F - y * e.prof * .42 * v, F) - M;
+      const px = e.bx * W;
+      const tw = estatico ? 1 : .45 + .55 * Math.sin(t * e.ritmo + e.fase);
+      const col = CFG.colores[e.c];
+      ctx.globalAlpha = Math.min(1, e.a * (.35 + .65 * tw) * b);
+      ctx.fillStyle = 'rgb(' + col + ')';
+      ctx.beginPath(); ctx.arc(px, py, e.tam, 0, 6.283); ctx.fill();
+      if (e.grande) {
+        ctx.strokeStyle = 'rgb(' + col + ')'; ctx.lineWidth = .6;
+        const l = e.tam * 3.4 * (.6 + .4 * tw);
+        ctx.beginPath(); ctx.moveTo(px - l, py); ctx.lineTo(px + l, py); ctx.moveTo(px, py - l); ctx.lineTo(px, py + l); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    // 4) Constelaciones
+    dibujarConstelaciones(t, y, b, v, estatico, F);
+
+    // 5) Luciérnagas, plumas y polvo con parallax (cada capa a distinta velocidad)
+    for (const q of parts) {
+      const py = mod(q.by * F - y * q.prof * .42 * v, F) - M;
+      const px = mod(q.bx * FW + Math.sin(y * .0034 * q.vaiven * v + q.fase) * q.amp * q.prof + wind * q.prof, FW) - M;
+      const tw = estatico ? 1 : .55 + .45 * Math.sin(t * q.ritmo + q.fase);
+      const pulso = estatico ? 1 : .8 + .2 * Math.sin(y * .006 + q.fase);
+
+      if (q.tipo === 'luz') {
+        const s = q.tam * (.85 + .3 * tw);
+        ctx.globalAlpha = Math.min(1, q.a * tw * pulso * b);
+        ctx.drawImage(glow[q.c], px - s * 1.5, py - s * 1.5, s * 3, s * 3);
+      } else if (q.tipo === 'polvo') {
+        ctx.globalAlpha = Math.min(1, q.a * (.5 + .5 * tw) * b);
+        ctx.fillStyle = 'rgb(' + CFG.colores[q.c] + ')';
+        ctx.beginPath(); ctx.arc(px, py, q.tam, 0, 6.283); ctx.fill();
+      } else {
+        const col = CFG.colores[q.c];
+        const ang = q.fase + (estatico ? 0 : y * .0022 * q.giro * v + Math.sin(t * .5 + q.fase) * .25);
+        const giro3d = estatico ? 1 : .3 + .7 * Math.abs(Math.cos(y * .0028 * v + q.fase));
+        ctx.save();
+        ctx.translate(px, py); ctx.rotate(ang); ctx.scale(q.tam, q.tam * giro3d);
+        ctx.globalAlpha = Math.min(1, q.a * b);
+        ctx.fillStyle = 'rgb(' + col + ')';
+        ctx.beginPath(); ctx.moveTo(-1, 0); ctx.quadraticCurveTo(-.2, -.55, 1, 0); ctx.quadraticCurveTo(-.2, .55, -1, 0); ctx.fill();
+        ctx.globalAlpha = Math.min(1, q.a * 1.6 * b);
+        ctx.strokeStyle = 'rgb(' + col + ')'; ctx.lineWidth = .05;
+        ctx.beginPath(); ctx.moveTo(-1.3, 0); ctx.lineTo(.9, 0); ctx.stroke();
+        ctx.restore();
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    // 6) Estrellas fugaces (por encima de todo)
+    if (!estatico) dibujarFugaces(b);
+  }
+
+  function cuadro(ahora) {
+    raf = 0;
+    const dtReal = Math.max(.001, (ahora - last) / 1000 || .016);
+    const dt = Math.min(.05, dtReal); last = ahora;
+    const objetivo = window.scrollY || 0;
+    const vel = Math.min(6000, Math.abs(objetivo - prevY) / dtReal);   // velocidad real del scroll (px/s)
+    prevY = objetivo;
+    velS += (vel - velS) * (1 - Math.exp(-dt * 8));
+    actualizarFugaces(dt, ahora / 1000);
+    const resto = objetivo - sy;
+    sy += resto * (1 - Math.exp(-dt * CFG.suavidad));   // interpolación suave (lerp)
+    wind = Math.max(-40, Math.min(40, resto * .05));      // un empujoncito lateral al scrollear rápido
+    dibujar(ahora / 1000, false);
+    raf = requestAnimationFrame(cuadro);
+  }
+
+  function iniciar() {
+    if (raf || reducido || document.hidden) return;
+    last = performance.now(); prevY = window.scrollY || 0; velS = 0; raf = requestAnimationFrame(cuadro);
+  }
+  function parar() { if (raf) cancelAnimationFrame(raf); raf = 0; }
+
+  crearSprites();
+  medir();
+  if (reducido) dibujar(0, true); else iniciar();
+
+  let pendiente = 0;
+  const alCambiar = () => { if (pendiente) return; pendiente = requestAnimationFrame(() => { pendiente = 0; medir(); medirSecciones(); }); };
+  window.addEventListener('resize', alCambiar, { passive: true });
+  window.addEventListener('load', alCambiar);
+  if ('ResizeObserver' in window) new ResizeObserver(alCambiar).observe(document.body);
+
+  document.addEventListener('visibilitychange', () => { document.hidden ? parar() : iniciar(); });
+  const cambioMov = e => { reducido = e.matches; parar(); if (reducido) dibujar(0, true); else iniciar(); };
+  mqMovimiento.addEventListener ? mqMovimiento.addEventListener('change', cambioMov) : mqMovimiento.addListener(cambioMov);
 })();
 </script>
 </body>
