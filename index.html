@@ -204,7 +204,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://luisdornellez.github.io/#web","url":"https://luisdornellez.github.io/","name":"Luis Dornellez","inLanguage":"es","publisher":{"@id":"https://luisdornellez.github.io/#autor"}},
-{"@type":"Person","@id":"https://luisdornellez.github.io/#autor","name":"Luis Dornellez","jobTitle":"Escritor y poeta","url":"https://luisdornellez.github.io/","email":"elpoetik@gmail.com","nationality":{"@type":"Country","name":"Uruguay"},"sameAs":["https://www.facebook.com/dorneelleez.luiis/","https://www.tiktok.com/@versosdelpensador"]},
+{"@type":"Person","@id":"https://luisdornellez.github.io/#autor","name":"Luis Dornellez","jobTitle":"Escritor y poeta","url":"https://luisdornellez.github.io/","email":"dz.luis.web@gmail.com","nationality":{"@type":"Country","name":"Uruguay"},"sameAs":["https://www.facebook.com/dorneelleez.luiis/","https://www.tiktok.com/@versosdelpensador"]},
 {"@type":"Book","name":"Un poco de amor propio","inLanguage":"es","bookFormat":"https://schema.org/Paperback","author":{"@id":"https://luisdornellez.github.io/#autor"},"image":"https://luisdornellez.github.io/portada-un-poco-de-amor-propio.jpg","url":"https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4","offers":{"@type":"Offer","price":"13.22","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.lulu.com/shop/luis-dornellez/un-poco-de-amor-propio/paperback/product-je8dn5g.html?page=1&pageSize=4"}},
 {"@type":"Book","name":"Donde el corazón aprende a quedarse","inLanguage":"es","bookFormat":"https://schema.org/Paperback","author":{"@id":"https://luisdornellez.github.io/#autor"},"image":"https://luisdornellez.github.io/portada-donde-el-corazon-aprende-a-quedarse.jpg","url":"https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4","offers":{"@type":"Offer","price":"12.09","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://www.lulu.com/shop/luis-dornellez/donde-el-coraz%C3%B3n-aprende-a-quedarse/paperback/product-rm26kr6.html?page=1&pageSize=4"}}
 ]}
@@ -301,7 +301,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
                 <li><strong>Android:</strong> instala <strong>Google Play Libros</strong> (gratis) y ábrelo con esa app. También sirven Lithium o Moon+ Reader.</li>
                 <li><strong>Computadora:</strong> Calibre o Thorium Reader, ambos gratis.</li>
               </ul>
-              <p class="nota">Guarda el archivo: ya es tuyo. Si tienes cualquier duda o consulta, o si algo falla, escríbeme a <a href="mailto:elpoetik@gmail.com?subject=Consulta%20sobre%20mi%20libro" style="color:var(--oro);text-decoration:underline">elpoetik@gmail.com</a> y con gusto te ayudo.</p>
+              <p class="nota">Guarda el archivo: ya es tuyo. Si tienes cualquier duda o consulta, o si algo falla, escríbeme a <a href="mailto:dz.luis.web@gmail.com?subject=Consulta%20sobre%20mi%20libro" style="color:var(--oro);text-decoration:underline">dz.luis.web@gmail.com</a> y con gusto te ayudo.</p>
             </div>
           </div>
         </article>
@@ -338,8 +338,8 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
       <div class="card contacto">
         <h2>Escríbeme</h2>
         <p>¿Quieres compartirme lo que sentiste al leer, o tienes una consulta? Me encantará leerte.</p>
-        <a class="btn" href="mailto:elpoetik@gmail.com?subject=Hola%20Luis">Escribirme un correo</a>
-        <p class="correo">elpoetik@gmail.com</p>
+        <a class="btn" href="mailto:dz.luis.web@gmail.com?subject=Hola%20Luis">Escribirme un correo</a>
+        <p class="correo">dz.luis.web@gmail.com</p>
       </div>
     </div>
   </section>
@@ -427,7 +427,7 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
     const resto = fin - Date.now();
     if (resto <= 0) {
       clearInterval(reloj); enlace.hidden = true; enlace.removeAttribute('href');
-      cuenta.textContent = 'Se acabó el tiempo de descarga. Escríbeme a elpoetik@gmail.com y te ayudo.';
+      cuenta.textContent = 'Se acabó el tiempo de descarga. Escríbeme a dz.luis.web@gmail.com y te ayudo.';
       return;
     }
     cuenta.textContent = 'Tiempo para descargar: ' + formato(resto);
@@ -450,9 +450,9 @@ footer{margin-top:96px;padding:56px 0 40px;border-top:1px solid var(--bd)}
         amount: { currency_code: MONEDA, value: PRECIO } }] }),
       onApprove: (d, a) => a.order.capture().then(det => {
         if (det.status === 'COMPLETED') { try { localStorage.setItem(CLAVE, det.id); localStorage.removeItem(CLAVE_FIN); } catch (e) {} desbloquear(true); }
-        else estado.textContent = 'El pago no se completó. Si se te cobró, escríbeme a elpoetik@gmail.com.';
+        else estado.textContent = 'El pago no se completó. Si se te cobró, escríbeme a dz.luis.web@gmail.com.';
       }),
-      onError: () => { estado.textContent = 'Hubo un problema con el pago. Inténtalo otra vez o escríbeme a elpoetik@gmail.com.'; }
+      onError: () => { estado.textContent = 'Hubo un problema con el pago. Inténtalo otra vez o escríbeme a dz.luis.web@gmail.com.'; }
     };
     // Solo el botón de tarjeta (sin el botón amarillo de PayPal)
     const tarjeta = paypal.Buttons(Object.assign({
